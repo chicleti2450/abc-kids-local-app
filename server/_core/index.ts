@@ -8,6 +8,7 @@ import { registerStorageProxy } from "./storageProxy";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { readAppData, writeAppData } from "../localStore";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -36,6 +37,13 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   registerStorageProxy(app);
   registerOAuthRoutes(app);
+  app.get("/api/local-state", async (_req, res) => {
+    res.json(await readAppData());
+  });
+  app.put("/api/local-state", async (req, res) => {
+    await writeAppData(req.body);
+    res.json({ ok: true });
+  });
   // tRPC API
   app.use(
     "/api/trpc",
