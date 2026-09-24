@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import {
   AnimalAvatar,
-  Mascots,
   Sparkle,
   Star,
 } from "../components/art"
