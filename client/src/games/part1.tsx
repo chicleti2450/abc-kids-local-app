@@ -23,10 +23,10 @@ const EX01: Ex01[] = [
   { pre: "C", post: "SA", answer: "A", word: "CASA", img: "house", opts: ["O","A","E"], hint: "C-?-SA: onde moramos. A vogal mais usada do português!" },
   { pre: "FA", post: "A", answer: "C", word: "FACA", img: "knife", opts: ["C","S","T"], hint: "FA-?-A: corta pão. Consoante do cachorro: C!" },
   { pre: "L", post: "VRO", answer: "I", word: "LIVRO", img: "book", opts: ["I","E","O"], hint: "L-?-VRO: cheio de histórias. Vogal no meio: I!" },
-  { pre: "PA", post: "O", answer: "T", word: "PATO", img: "cat", opts: ["T","D","C"], hint: "PA-?-O: ave que nada. O som firme no meio: T!" },
+  { pre: "PA", post: "O", answer: "T", word: "PATO", img: "duck", opts: ["T","D","C"], hint: "PA-?-O: ave que nada. O som firme no meio: T!" },
   { pre: "S", post: "L", answer: "O", word: "SOL", img: "sun", opts: ["O","A","U"], hint: "S-?-L: brilha no céu. Vogal redonda como o sol!" },
   { pre: "CAR", post: "A", answer: "T", word: "CARTA", img: "envelope", opts: ["T","D","S"], hint: "CAR-?-A: mandamos pelo correio. Letra T!" },
-  { pre: "D", post: "DO", answer: "A", word: "DADO", img: "ball", opts: ["A","E","O"], hint: "D-?-DO: tem seis faces. A vogal mais fácil: A!" },
+  { pre: "D", post: "DO", answer: "A", word: "DADO", img: "dice", opts: ["A","E","O"], hint: "D-?-DO: tem seis faces. A vogal mais fácil: A!" },
 ]
 
 const EX01_ALFA: Ex01[] = [
@@ -204,15 +204,15 @@ const EX03: Ex03[] = [
   { target: ["CAR","TA"],       pool: ["TA","CAR","LA","TO","SA","MA"],  img: "envelope", word: "CARTA",    hint: "CAR + TA = CARTA! Carta é o que enviamos pelo correio!" },
   { target: ["CA","CHO","RRO"], pool: ["CA","BO","CHO","RA","RRO","TA"], img: "dog",      word: "CACHORRO", hint: "CA + CHO + RRO = CACHORRO! O animal que faz AU AU!" },
   { target: ["JA","NE","LA"],   pool: ["JA","LE","NE","LA","CA","TA"],   img: "house",    word: "JANELA",   hint: "JA + NE + LA = JANELA! Por onde vemos a rua!" },
-  { target: ["SA","PA","TO"],   pool: ["SA","PA","LA","TO","BO","CA"],   img: "ball",     word: "SAPATO",   hint: "SA + PA + TO = SAPATO! Colocamos no pé!" },
+  { target: ["SA","PA","TO"],   pool: ["SA","PA","LA","TO","BO","CA"],   img: "shoe",     word: "SAPATO",   hint: "SA + PA + TO = SAPATO! Colocamos no pé!" },
   { target: ["MA","CA","CO"],   pool: ["MA","CA","CO","SA","LA","BO"],   img: "monkey",   word: "MACACO",   hint: "MA + CA + CO = MACACO! Vive na floresta!" },
-  { target: ["TO","MA","TE"],   pool: ["TO","BO","MA","TE","LA","CA"],   img: "ball",     word: "TOMATE",   hint: "TO + MA + TE = TOMATE! Vermelho e gostoso!" },
+  { target: ["TO","MA","TE"],   pool: ["TO","BO","MA","TE","LA","CA"],   img: "tomato",     word: "TOMATE",   hint: "TO + MA + TE = TOMATE! Vermelho e gostoso!" },
 ]
 
 const EX03_ALFA: Ex03[] = [
   { target: ["BOR","BO","LE","TA"],  pool: ["BOR","BO","LE","TA","CA","SA"], img: "ball",  word: "BORBOLETA",  hint: "BOR+BO+LE+TA = BORBOLETA! Voa de flor em flor!" },
   { target: ["CHO","CO","LA","TE"],  pool: ["CHO","CO","LA","TE","BO","SA"], img: "apple", word: "CHOCOLATE",  hint: "CHO+CO+LA+TE = CHOCOLATE! Doce feito de cacau!" },
-  { target: ["E","LE","FAN","TE"],   pool: ["E","LE","FAN","TE","CA","BO"],  img: "cat",   word: "ELEFANTE",   hint: "E+LE+FAN+TE = ELEFANTE! O maior da floresta!" },
+  { target: ["E","LE","FAN","TE"],   pool: ["E","LE","FAN","TE","CA","BO"],  img: "elephant",   word: "ELEFANTE",   hint: "E+LE+FAN+TE = ELEFANTE! O maior da floresta!" },
   { target: ["BI","CI","CLE","TA"],  pool: ["BI","CI","CLE","TA","SA","NA"], img: "ball",  word: "BICICLETA",  hint: "BI+CI+CLE+TA = BICICLETA! Anda com pedais!" },
   { target: ["TAR","TA","RU","GA"],  pool: ["TAR","TA","RU","GA","BO","LA"], img: "ball",  word: "TARTARUGA",  hint: "TAR+TA+RU+GA = TARTARUGA! Anda devagarzinho!" },
   { target: ["GI","RAS","SOL"],      pool: ["GI","RAS","SOL","BO","TA","CA"],img: "sun",   word: "GIRASSOL",   hint: "GI+RAS+SOL = GIRASSOL! Sempre de frente ao sol!" },

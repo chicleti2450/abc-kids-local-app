@@ -114,7 +114,6 @@ export function StudentLoginScreen({
 
       <div className="mt-2 flex flex-col items-center">
         <div className="anim-float mb-1">
-          <Mascots size={120} />
         </div>
         <h1 className="text-2xl font-bold uppercase" style={{ color: PALETTE.blueDeep }}>
           QUEM ESTÁ CHEGANDO?

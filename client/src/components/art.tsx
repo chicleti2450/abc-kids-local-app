@@ -652,6 +652,10 @@ export function ObjectIcon({
     gato: "gato",
     monkey: "macaco",
     macaco: "macaco",
+    frog: "sapo",
+    sapo: "sapo",
+    giraffe: "girafa",
+    girafa: "girafa",
   }
   if (animalMap[name]) {
     return <AnimalAvatar animal={animalMap[name]} size={size} happy />
@@ -680,6 +684,125 @@ export function ObjectIcon({
           <circle cx="50" cy="52" r="34" fill="#fff" stroke={PALETTE.blueDeep} strokeWidth="2.5" />
           <path d="M50 24 l10 8 -4 12 h-12 l-4-12z" fill={PALETTE.blueDeep} />
           <path d="M50 80 l-14-6 4-10 h20 l4 10z" fill={PALETTE.blue} opacity="0.5" />
+        </svg>
+      )
+    case "dice": // DADO
+      return (
+        <svg {...common}>
+          <rect x="22" y="22" width="56" height="56" rx="10" fill={PALETTE.coral} stroke={PALETTE.blueDeep} strokeWidth="3" />
+          {[{ x: 36, y: 36 }, { x: 64, y: 36 }, { x: 50, y: 50 }, { x: 36, y: 64 }, { x: 64, y: 64 }].map((dot) => (
+            <circle key={`${dot.x}-${dot.y}`} cx={dot.x} cy={dot.y} r="4" fill="#fff" />
+          ))}
+        </svg>
+      )
+    case "duck": // PATO
+      return (
+        <svg {...common}>
+          <ellipse cx="48" cy="56" rx="28" ry="22" fill={PALETTE.yellow} />
+          <circle cx="66" cy="38" r="17" fill={PALETTE.yellow} />
+          <path d="M78 38 h14 l-10 8 h-8z" fill={PALETTE.orange} />
+          <circle cx="70" cy="34" r="3" fill={PALETTE.blueDeep} />
+          <path d="M30 72 v12 M58 72 v12" stroke={PALETTE.orange} strokeWidth="6" strokeLinecap="round" />
+        </svg>
+      )
+    case "shoe": // SAPATO
+      return (
+        <svg {...common}>
+          <path d="M18 66 q18 2 30-22 l12 12 q10 8 22 10 v12 H18z" fill={PALETTE.blue} stroke={PALETTE.blueDeep} strokeWidth="3" />
+          <path d="M48 48 l12 8 M44 54 l12 8" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+        </svg>
+      )
+    case "tomato": // TOMATE
+      return (
+        <svg {...common}>
+          <circle cx="50" cy="56" r="28" fill={PALETTE.coral} />
+          <path d="M50 30 l5 12 14-4-9 11 10 8-15-3-5 12-5-12-15 3 10-8-9-11 14 4z" fill={PALETTE.green} />
+        </svg>
+      )
+    case "bottle": // GARRAFA
+      return (
+        <svg {...common}>
+          <path d="M42 20 h16 v12 l8 10 v38 H34 V42 l8-10z" fill={PALETTE.sky} stroke={PALETTE.blueDeep} strokeWidth="3" />
+          <path d="M36 58 h28" stroke="#fff" strokeWidth="4" opacity="0.8" />
+        </svg>
+      )
+    case "bicycle": // BICICLETA
+      return (
+        <svg {...common}>
+          <circle cx="30" cy="68" r="17" fill="none" stroke={PALETTE.blue} strokeWidth="4" />
+          <circle cx="72" cy="68" r="17" fill="none" stroke={PALETTE.blue} strokeWidth="4" />
+          <path d="M30 68 L45 40 L60 68 L38 68 L53 48 H65 M45 40 h12" fill="none" stroke={PALETTE.orange} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )
+    case "elephant": // ELEFANTE
+      return (
+        <svg {...common}>
+          <ellipse cx="50" cy="55" rx="30" ry="25" fill="#A9B8C5" />
+          <circle cx="70" cy="42" r="18" fill="#A9B8C5" />
+          <path d="M80 48 q18 8 4 28" fill="none" stroke="#8799A8" strokeWidth="9" strokeLinecap="round" />
+          <circle cx="75" cy="38" r="3" fill={PALETTE.blueDeep} />
+          <path d="M28 45 q-18-18-20 4 q16 12 24 4z" fill="#C5D0D8" />
+          <path d="M32 73 v12 M62 73 v12" stroke="#8799A8" strokeWidth="7" strokeLinecap="round" />
+        </svg>
+      )
+    case "butterfly": // BORBOLETA
+      return (
+        <svg {...common}>
+          <ellipse cx="34" cy="42" rx="20" ry="25" fill={PALETTE.pink} />
+          <ellipse cx="66" cy="42" rx="20" ry="25" fill={PALETTE.lilac} />
+          <ellipse cx="50" cy="55" rx="6" ry="25" fill={PALETTE.orange} />
+          <path d="M47 30 q-12-16-18-8 M53 30 q12-16 18-8" fill="none" stroke={PALETTE.blueDeep} strokeWidth="3" />
+        </svg>
+      )
+    case "suitcase": // MALA
+      return (
+        <svg {...common}>
+          <rect x="20" y="34" width="60" height="46" rx="8" fill={PALETTE.orange} stroke={PALETTE.blueDeep} strokeWidth="3" />
+          <path d="M38 34 v-10 h24 v10" fill="none" stroke={PALETTE.blueDeep} strokeWidth="5" />
+          <path d="M50 36 v42" stroke="#fff" strokeWidth="3" opacity="0.7" />
+          <circle cx="32" cy="84" r="4" fill={PALETTE.blueDeep} /><circle cx="68" cy="84" r="4" fill={PALETTE.blueDeep} />
+        </svg>
+      )
+    case "whale": // BALEIA
+      return (
+        <svg {...common}>
+          <path d="M16 58 q14-30 48-18 q20 7 20 25 q-12 16-38 12 q-18-2-30-19z" fill={PALETTE.blue} />
+          <path d="M28 43 q-4-18 4-24 q8 10 4 22" fill={PALETTE.sky} />
+          <circle cx="69" cy="50" r="3" fill={PALETTE.blueDeep} />
+          <path d="M30 76 q-8 12-18 8 M30 76 q-2 12 8 14" fill="none" stroke={PALETTE.blueDeep} strokeWidth="4" />
+        </svg>
+      )
+    case "camel": // CAMELO
+      return (
+        <svg {...common}>
+          <path d="M24 76 V48 q0-16 12-16 q8 0 12 12 q4-12 12-12 q12 0 12 16 v28" fill="none" stroke={PALETTE.orange} strokeWidth="12" strokeLinecap="round" />
+          <circle cx="70" cy="31" r="10" fill={PALETTE.orange} />
+          <circle cx="74" cy="29" r="2" fill={PALETTE.blueDeep} />
+          <path d="M22 76 v10 M68 76 v10" stroke={PALETTE.blueDeep} strokeWidth="6" strokeLinecap="round" />
+        </svg>
+      )
+    case "turtle": // TARTARUGA
+      return (
+        <svg {...common}>
+          <ellipse cx="50" cy="52" rx="30" ry="22" fill={PALETTE.green} stroke={PALETTE.blueDeep} strokeWidth="3" />
+          <path d="M28 52 q22-18 44 0 q-22 18-44 0z" fill={PALETTE.yellow} opacity="0.65" />
+          <circle cx="82" cy="52" r="10" fill={PALETTE.green} />
+          <circle cx="85" cy="49" r="2" fill={PALETTE.blueDeep} />
+          <path d="M28 38 l-12-10 M28 66 l-12 10 M72 38 l12-10 M72 66 l12 10" stroke={PALETTE.green} strokeWidth="8" strokeLinecap="round" />
+        </svg>
+      )
+    case "eraser": // BORRACHA
+      return (
+        <svg {...common}>
+          <path d="M24 66 l34-38 q5-6 11 0 l10 10 q5 5 0 11 L45 80 H30 q-12-4-6-14z" fill={PALETTE.pink} stroke={PALETTE.blueDeep} strokeWidth="3" />
+          <path d="M48 40 l20 20" stroke="#fff" strokeWidth="5" opacity="0.8" />
+        </svg>
+      )
+    case "chocolate": // CHOCOLATE
+      return (
+        <svg {...common}>
+          <rect x="24" y="24" width="52" height="54" rx="5" fill="#8B5A3C" stroke={PALETTE.blueDeep} strokeWidth="3" />
+          {[0, 1, 2].map((row) => [0, 1, 2].map((col) => <rect key={`${row}-${col}`} x={29 + col * 15} y={29 + row * 15} width="11" height="11" rx="2" fill="#B77A50" />))}
         </svg>
       )
     case "glue": // COLA

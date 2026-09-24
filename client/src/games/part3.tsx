@@ -19,7 +19,7 @@ interface Ex09 { word: string; img: string; opts: { text: string; rhymes: boolea
 const EX09: Ex09[] = [
   { word: "BOLA", img: "ball",  hint: "BOLA rima com MOLA e COLA! Terminam com -OLA!",
     opts: [{ text:"MOLA", rhymes:true, img:"ball" },{ text:"GATO", rhymes:false, img:"cat" },{ text:"COLA", rhymes:true, img:"glue" }] },
-  { word: "PATO", img: "cat",   hint: "PATO rima com GATO e RATO! Terminam com -ATO!",
+  { word: "PATO", img: "duck",   hint: "PATO rima com GATO e RATO! Terminam com -ATO!",
     opts: [{ text:"GATO", rhymes:true, img:"cat" },{ text:"BOLA", rhymes:false, img:"ball" },{ text:"RATO", rhymes:true, img:"dog" }] },
   { word: "SOL",  img: "sun",   hint: "SOL rima com FAROL e LENÇOL! Terminam com -OL!",
     opts: [{ text:"FAROL", rhymes:true, img:"sun" },{ text:"CASA", rhymes:false, img:"house" },{ text:"LENÇOL", rhymes:true, img:"ball" }] },

@@ -105,14 +105,14 @@ const EX06: Ex06[] = [
 ]
 
 const EX06_ALFA: Ex06[] = [
-  { img: "ball",  word: "BICICLETA", opts: ["BICICLETA","BICILETA","BISCICLETA","BICICRETA"], hint: "Anda com pedais e duas rodas: BICICLETA!" },
-  { img: "cat",   word: "BORBOLETA", opts: ["BORBOLETA","BORBILETA","BURBOLETA","BOLBOLETA"], hint: "Inseto colorido que voa: BORBOLETA!" },
+  { img: "bicycle",  word: "BICICLETA", opts: ["BICICLETA","BICILETA","BISCICLETA","BICICRETA"], hint: "Anda com pedais e duas rodas: BICICLETA!" },
+  { img: "butterfly",   word: "BORBOLETA", opts: ["BORBOLETA","BORBILETA","BURBOLETA","BOLBOLETA"], hint: "Inseto colorido que voa: BORBOLETA!" },
   { img: "dog",   word: "CACHORRO",  opts: ["CACHORRO","CACHORO","CACHARO","CACORRO"],        hint: "Animal que faz AU AU: CACHORRO!" },
   { img: "sun",   word: "GIRASSOL",  opts: ["GIRASSOL","GIRASOL","JIRASSOL","GIRAZOL"],       hint: "Flor que segue o sol: GIRASSOL!" },
-  { img: "star",  word: "ELEFANTE",  opts: ["ELEFANTE","ELEFANTI","ELEFANTA","ELAFANTE"],     hint: "Maior animal terrestre: ELEFANTE!" },
-  { img: "house", word: "TARTARUGA", opts: ["TARTARUGA","TARTAROGA","TATARUGA","TARTARUJA"],  hint: "Réptil de casca dura: TARTARUGA!" },
-  { img: "apple", word: "CHOCOLATE", opts: ["CHOCOLATE","CHOCOLETE","CHOCOLATI","XOCOLATE"],  hint: "Doce feito de cacau: CHOCOLATE!" },
-  { img: "book",  word: "BORRACHA",  opts: ["BORRACHA","BORACHA","BORRAXA","BURRACHA"],       hint: "Apaga o lápis: BORRACHA!" },
+  { img: "elephant",  word: "ELEFANTE",  opts: ["ELEFANTE","ELEFANTI","ELEFANTA","ELAFANTE"],     hint: "Maior animal terrestre: ELEFANTE!" },
+  { img: "turtle", word: "TARTARUGA", opts: ["TARTARUGA","TARTAROGA","TATARUGA","TARTARUJA"],  hint: "Réptil de casca dura: TARTARUGA!" },
+  { img: "chocolate", word: "CHOCOLATE", opts: ["CHOCOLATE","CHOCOLETE","CHOCOLATI","XOCOLATE"],  hint: "Doce feito de cacau: CHOCOLATE!" },
+  { img: "eraser",  word: "BORRACHA",  opts: ["BORRACHA","BORACHA","BORRAXA","BURRACHA"],       hint: "Apaga o lápis: BORRACHA!" },
 ]
 
 export function Game06({ character, accent, accent2, onHome, onAdvance, isLast, level }: GameProps) {
@@ -179,11 +179,11 @@ const EX07: Ex07[] = [
   { word: "BOLA",  img: "ball",  hint: "Começa com B! B-O-L-A = BOLA!" },
   { word: "GATO",  img: "cat",   hint: "G-A-T-O = GATO! Faz miau!" },
   { word: "CASA",  img: "house", hint: "C-A-S-A = CASA! Onde moramos!" },
-  { word: "PATO",  img: "cat",   hint: "P-A-T-O = PATO! Nada na água!" },
-  { word: "DADO",  img: "ball",  hint: "D-A-D-O = DADO! Tem seis faces!" },
+  { word: "PATO",  img: "duck",   hint: "P-A-T-O = PATO! Nada na água!" },
+  { word: "DADO",  img: "dice",  hint: "D-A-D-O = DADO! Tem seis faces!" },
   { word: "FACA",  img: "knife", hint: "F-A-C-A = FACA! Corta pão!" },
-  { word: "MALA",  img: "ball",  hint: "M-A-L-A = MALA! Viajamos com ela!" },
-  { word: "SAPO",  img: "dog",   hint: "S-A-P-O = SAPO! Vive perto de lagoa!" },
+  { word: "MALA",  img: "suitcase",  hint: "M-A-L-A = MALA! Viajamos com ela!" },
+  { word: "SAPO",  img: "frog",   hint: "S-A-P-O = SAPO! Vive perto de lagoa!" },
 ]
 
 function shuffle<T>(arr: T[]): T[] {
@@ -191,12 +191,12 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 const EX07_ALFA: Ex07[] = [
-  { word: "BALEIA",  img: "ball",  hint: "B-A-L-E-I-A: maior animal do mar!" },
+  { word: "BALEIA",  img: "whale",  hint: "B-A-L-E-I-A: maior animal do mar!" },
   { word: "JARDIM",  img: "house", hint: "J-A-R-D-I-M: lugar cheio de flores e plantas!" },
-  { word: "GIRAFA",  img: "cat",   hint: "G-I-R-A-F-A: pescoço muito comprido!" },
+  { word: "GIRAFA",  img: "giraffe",   hint: "G-I-R-A-F-A: pescoço muito comprido!" },
   { word: "PLANETA", img: "sun",   hint: "P-L-A-N-E-T-A: a Terra é um planeta!" },
-  { word: "GARRAFA", img: "ball",  hint: "G-A-R-R-A-F-A: guarda água e sucos!" },
-  { word: "CAMELO",  img: "dog",   hint: "C-A-M-E-L-O: animal do deserto com corcova!" },
+  { word: "GARRAFA", img: "bottle",  hint: "G-A-R-R-A-F-A: guarda água e sucos!" },
+  { word: "CAMELO",  img: "camel",   hint: "C-A-M-E-L-O: animal do deserto com corcova!" },
 ]
 
 export function Game07({ character, accent, accent2, onHome, onAdvance, isLast, level }: GameProps) {
@@ -276,22 +276,22 @@ const EX08: Ex08[] = [
   { word: "PORTA",    opts: ["PORTA","TORTA","CARTA","HORTA"],   img: "house", hint: "Abre e fecha a casa: PORTA!" },
   { word: "GATO",     opts: ["PATO","GATO","MATO","RATO"],       img: "cat",   hint: "Faz miau e ronrona: GATO!" },
   { word: "LIVRO",    opts: ["LITRO","LIMPO","LIVRO","LIXO"],    img: "book",  hint: "Lemos histórias no: LIVRO!" },
-  { word: "ESCOLA",   opts: ["ESCADA","ESCOLA","ESPADA","ESCOVA"],img:"house", hint: "Onde aprendemos a ler: ESCOLA!" },
-  { word: "BORBOLETA",opts: ["BORBOLETA","BORRACHA","BORRÃO","BORDO"],img:"dog",hint:"Voa e é colorida: BORBOLETA!" },
+  { word: "ESCOLA",   opts: ["ESCADA","ESCOLA","ESPADA","ESCOVA"],img:"book", hint: "Onde aprendemos a ler: ESCOLA!" },
+  { word: "BORBOLETA",opts: ["BORBOLETA","BORRACHA","BORRÃO","BORDO"],img:"butterfly",hint:"Voa e é colorida: BORBOLETA!" },
   { word: "CACHORRO", opts: ["CARNEIRO","CAVALO","CACHORRO","COELHO"],img:"dog",hint:"Faz au-au: CACHORRO!" },
-  { word: "TARTARUGA",opts: ["TARTARUGA","TARANTULA","TARTÁN","TARRAFA"],img:"dog",hint:"Anda devagar e tem casco: TARTARUGA!" },
-  { word: "MARIPOSA", opts: ["MARIPOSA","MARGARIDA","MARAVILHA","MARISELA"],img:"dog",hint:"Parecida com borboleta, voa à noite: MARIPOSA!" },
+  { word: "TARTARUGA",opts: ["TARTARUGA","TARANTULA","TARTÁN","TARRAFA"],img:"turtle",hint:"Anda devagar e tem casco: TARTARUGA!" },
+  { word: "MARIPOSA", opts: ["MARIPOSA","MARGARIDA","MARAVILHA","MARISELA"],img:"butterfly",hint:"Parecida com borboleta, voa à noite: MARIPOSA!" },
 ]
 
 const EX08_ALFA: Ex08[] = [
-  { word: "BORBOLETA", opts: ["BORBOLETA","BORRACHA","BORRIFAR","BORRÃO"],     img: "cat",  hint: "Inseto com asas coloridas: BORBOLETA!" },
-  { word: "ELEFANTE",  opts: ["ELEFANTE","ESTANTE","ELEGANTE","ELAFANTE"],     img: "dog",  hint: "Maior animal da floresta: ELEFANTE!" },
-  { word: "CHOCOLATE", opts: ["CHOCOLATE","CHOCOLETE","CHOCALHO","XOCOLATE"],  img: "apple",hint: "Doce feito de cacau: CHOCOLATE!" },
-  { word: "TARTARUGA", opts: ["TARTARUGA","TARTAROGA","TATARUGA","TARTARUJA"], img: "dog",  hint: "Réptil com casca dura: TARTARUGA!" },
+  { word: "BORBOLETA", opts: ["BORBOLETA","BORRACHA","BORRIFAR","BORRÃO"],     img: "butterfly",  hint: "Inseto com asas coloridas: BORBOLETA!" },
+  { word: "ELEFANTE",  opts: ["ELEFANTE","ESTANTE","ELEGANTE","ELAFANTE"],     img: "elephant",  hint: "Maior animal da floresta: ELEFANTE!" },
+  { word: "CHOCOLATE", opts: ["CHOCOLATE","CHOCOLETE","CHOCALHO","XOCOLATE"],  img: "chocolate",hint: "Doce feito de cacau: CHOCOLATE!" },
+  { word: "TARTARUGA", opts: ["TARTARUGA","TARTAROGA","TATARUGA","TARTARUJA"], img: "turtle",  hint: "Réptil com casca dura: TARTARUGA!" },
   { word: "GIRASSOL",  opts: ["GIRASSOL","GIRASOL","JIRASSOL","GIRAZOL"],      img: "sun",  hint: "Flor que segue o sol: GIRASSOL!" },
-  { word: "BICICLETA", opts: ["BICICLETA","BICILETA","BISCICLETA","BICICRETA"],img: "ball", hint: "Pedalar é muito divertido: BICICLETA!" },
-  { word: "BORRACHA",  opts: ["BORRACHA","BORACHA","BORRAXA","BURRACHA"],      img: "book", hint: "Apaga o lápis no caderno: BORRACHA!" },
-  { word: "BALEIA",    opts: ["BALEIA","BALEA","BALENA","VALEIA"],              img: "ball", hint: "Maior animal do mar: BALEIA!" },
+  { word: "BICICLETA", opts: ["BICICLETA","BICILETA","BISCICLETA","BICICRETA"],img: "bicycle", hint: "Pedalar é muito divertido: BICICLETA!" },
+  { word: "BORRACHA",  opts: ["BORRACHA","BORACHA","BORRAXA","BURRACHA"],      img: "eraser", hint: "Apaga o lápis no caderno: BORRACHA!" },
+  { word: "BALEIA",    opts: ["BALEIA","BALEA","BALENA","VALEIA"],              img: "whale", hint: "Maior animal do mar: BALEIA!" },
 ]
 
 export function Game08({ character, accent, accent2, onHome, onAdvance, isLast, level }: GameProps) {
