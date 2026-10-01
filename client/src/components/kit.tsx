@@ -5,13 +5,13 @@ import { Character, PALETTE, playTone } from "../lib/store"
 /* 9:16 phone canvas, centered, with soft device frame. */
 export function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-auto bg-[#cfe9f7] p-2 sm:p-5">
+    <div className="abc-app-viewport flex h-full min-h-[100dvh] w-full items-center justify-center overflow-auto bg-[#cfe9f7] p-2 sm:p-5">
       <div
-        className="relative overflow-hidden bg-white shadow-[0_30px_80px_rgba(49,84,119,0.35)]"
+        className="abc-device-frame relative overflow-hidden bg-white shadow-[0_30px_80px_rgba(49,84,119,0.35)]"
         style={{
-          width: "min(430px, 100%)",
+          width: "100%",
           aspectRatio: "9 / 16",
-          maxHeight: "calc(100vh - 24px)",
+          maxHeight: "calc(100dvh - 24px)",
           borderRadius: 40,
           border: "8px solid #ffffff",
         }}
