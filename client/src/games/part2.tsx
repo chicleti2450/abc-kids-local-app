@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react"
-import { ObjectIcon } from "../components/art"
+import { ObjectIcon, wordImage } from "../components/art"
 import { PALETTE, speak } from "../lib/store"
 import { shade } from "../components/kit"
 import {
@@ -255,7 +255,7 @@ export function Game07({ character, accent, accent2, onHome, onAdvance, isLast, 
         <ProgressDots total={DATA.length} current={idx} color={accent} />
         <div className="mb-2 flex items-center gap-2">
           <div className="rounded-[24px] bg-white/90 p-2.5" style={{ boxShadow: "0 6px 18px rgba(49,84,119,0.14)" }}>
-            <ObjectIcon name={ex.img} size={96} />
+            <ObjectIcon name={wordImage(ex.word, ex.img)} size={96} />
           </div>
           <SpeakButton text={ex.word} label="OUVIR" />
         </div>
@@ -342,7 +342,7 @@ export function Game08({ character, accent, accent2, onHome, onAdvance, isLast, 
         <ProgressDots total={DATA.length} current={idx} color={accent} />
         <div className="mb-3 flex flex-col items-center gap-3">
           <div className="rounded-[28px] bg-white/95 p-4" style={{ boxShadow: "0 8px 24px rgba(49,84,119,0.18)" }}>
-            <ObjectIcon name={ex.img} size={108} />
+            <ObjectIcon name={wordImage(ex.word, ex.img)} size={108} />
           </div>
           <SpeakButton text={ex.word} label="OUVIR PALAVRA" slow />
         </div>

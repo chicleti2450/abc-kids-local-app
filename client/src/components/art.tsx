@@ -633,8 +633,25 @@ export function Mascots({ size = 220 }: { size?: number }) {
 }
 
 /* ============================================================= *
- *  Word / object illustrations for the games
+ * Word / object illustrations for the games
  * ============================================================= */
+export const WORD_IMAGE_MAP: Record<string, string> = {
+  FACA: "knife", BARCA: "boat", PULAR: "jumping", PORTA: "door", COLAR: "necklace", ARCO: "rainbow",
+  BOLSO: "pocket", PALCO: "stage", JANELA: "window", MATO: "plant", FOCA: "seal", GATO: "cat",
+  ROCA: "distaff", CAMA: "bed", FAMA: "trophy", DAMA: "chess", MALA: "suitcase", SALA: "room",
+  ESTRELA: "star", ESCOLA: "book", VASA: "vase", RASA: "pool", DOR: "bandage", FLOR: "plant",
+  PACA: "animal", VAPOR: "cloud", POSSE: "box", BOLA: "ball", MOLA: "spring", COLA: "glue", PATO: "duck",
+  RATO: "rat", FAROL: "lantern", CASA: "house", LIVRO: "book", SOL: "sun", MESA: "table", COR: "rainbow",
+  MÃO: "hand", AVIÃO: "airplane", BALA: "candy", VACA: "cow", DADO: "dice", CALOR: "sun",
+  GOLA: "shirt", VELA: "candle", MORTE: "skull", SORTE: "star", NOVA: "star", COVA: "hole", SANTA: "star",
+  MANTA: "blanket", BOCA: "mouth", BANCO: "bench", FRANCO: "person", GRATO: "star", FOCO: "lantern", TOCO: "stick",
+  BRANCO: "cloud", PRATO: "plate", GRÃO: "seed", BLOCO: "block", AMOR: "heart", BRASA: "fire", PÃO: "bread", MAÇÃ: "apple",
+}
+
+export function wordImage(word: string, fallback: string) {
+  return WORD_IMAGE_MAP[word.trim().toLocaleUpperCase("pt-BR")] ?? fallback
+}
+
 export function ObjectIcon({
   name,
   size = 120,
@@ -899,10 +916,66 @@ export function ObjectIcon({
       return <svg {...common}><rect x="22" y="22" width="56" height="58" rx="4" fill={PALETTE.skySoft} stroke={PALETTE.blueDeep} strokeWidth="4" /><path d="M50 24 v54 M24 50 h52" stroke={PALETTE.blueDeep} strokeWidth="3" /></svg>
     case "table":
       return <svg {...common}><rect x="18" y="34" width="64" height="12" rx="4" fill={PALETTE.orange} /><path d="M28 46 v36 M72 46 v36" stroke={PALETTE.blueDeep} strokeWidth="6" /></svg>
-    case "rainbow":
-      return <svg {...common}><path d="M18 76 Q50 20 82 76" fill="none" stroke={PALETTE.pink} strokeWidth="8" /><path d="M28 76 Q50 38 72 76" fill="none" stroke={PALETTE.yellow} strokeWidth="8" /><path d="M38 76 Q50 54 62 76" fill="none" stroke={PALETTE.green} strokeWidth="8" /></svg>
     case "mouth":
       return <svg {...common}><path d="M20 48 Q50 28 80 48 Q50 82 20 48Z" fill={PALETTE.coral} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M30 46 h40" stroke="#fff" strokeWidth="6" /></svg>
+    case "knife":
+      return <svg {...common}><path d="M18 28 Q58 20 78 42 Q58 48 18 48Z" fill="#dce8ee" stroke={PALETTE.blueDeep} strokeWidth="3" /><rect x="18" y="48" width="28" height="12" rx="5" fill={PALETTE.orange} /></svg>
+    case "boat":
+      return <svg {...common}><path d="M18 58 h64 l-10 20 H30z" fill={PALETTE.orange} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M50 58 V22 M50 24 L72 48 H50z" fill={PALETTE.pink} stroke={PALETTE.blueDeep} strokeWidth="3" /></svg>
+    case "door":
+      return <svg {...common}><rect x="25" y="18" width="50" height="68" rx="4" fill={PALETTE.orange} stroke={PALETTE.blueDeep} strokeWidth="3" /><circle cx="63" cy="54" r="4" fill={PALETTE.yellow} /></svg>
+    case "rainbow":
+      return <svg {...common}><path d="M16 78 Q50 18 84 78" fill="none" stroke={PALETTE.pink} strokeWidth="9" /><path d="M28 78 Q50 38 72 78" fill="none" stroke={PALETTE.yellow} strokeWidth="9" /><path d="M40 78 Q50 56 60 78" fill="none" stroke={PALETTE.green} strokeWidth="9" /></svg>
+    case "pocket":
+      return <svg {...common}><path d="M24 28 h52 v48 q-26 18-52 0z" fill={PALETTE.blue} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M30 42 Q50 62 70 42" fill="none" stroke="#fff" strokeWidth="4" /></svg>
+    case "stage":
+      return <svg {...common}><rect x="18" y="22" width="64" height="58" fill={PALETTE.pink} /><path d="M18 22 Q34 42 50 22 Q66 42 82 22" fill={PALETTE.coral} /><rect x="28" y="56" width="44" height="24" fill={PALETTE.orange} /></svg>
+    case "jumping":
+      return <svg {...common}><circle cx="50" cy="30" r="12" fill={PALETTE.orange} /><path d="M50 44 v22 M50 50 l-18-12 M50 50 l18-12 M50 66 l-16 16 M50 66 l16 16" stroke={PALETTE.blueDeep} strokeWidth="6" strokeLinecap="round" /></svg>
+    case "necklace":
+      return <svg {...common}><path d="M22 28 Q50 78 78 28" fill="none" stroke={PALETTE.pink} strokeWidth="6" /><circle cx="50" cy="68" r="10" fill={PALETTE.yellow} stroke={PALETTE.coral} strokeWidth="3" /></svg>
+    case "vase":
+      return <svg {...common}><path d="M38 24 h24 l-4 18 q14 12 12 32 H30 q-2-20 12-32z" fill={PALETTE.lilac} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M50 42 V20 M50 30 Q34 20 30 8 M50 30 Q66 20 70 8" stroke={PALETTE.green} strokeWidth="4" fill="none" /></svg>
+    case "seal":
+      return <svg {...common}><ellipse cx="50" cy="58" rx="32" ry="22" fill={PALETTE.blue} /><circle cx="50" cy="38" r="18" fill={PALETTE.blue} /><circle cx="44" cy="36" r="3" fill={PALETTE.blueDeep} /><circle cx="56" cy="36" r="3" fill={PALETTE.blueDeep} /><path d="M44 46 Q50 50 56 46" fill="none" stroke={PALETTE.blueDeep} strokeWidth="3" /></svg>
+    case "distaff":
+      return <svg {...common}><path d="M30 78 L68 24 M48 52 l-18-12 M52 46 l18 12" stroke={PALETTE.orange} strokeWidth="6" /><path d="M56 24 q16-12 24 2 q-12 14-24-2z" fill={PALETTE.pink} /></svg>
+    case "bed":
+      return <svg {...common}><rect x="18" y="48" width="64" height="26" rx="5" fill={PALETTE.pink} stroke={PALETTE.blueDeep} strokeWidth="3" /><rect x="24" y="36" width="25" height="18" rx="5" fill="#fff" /><path d="M20 74 v12 M76 74 v12" stroke={PALETTE.blueDeep} strokeWidth="5" /></svg>
+    case "trophy":
+      return <svg {...common}><path d="M34 22 h32 v25 q0 20-16 20t-16-20z" fill={PALETTE.yellow} stroke={PALETTE.orange} strokeWidth="3" /><path d="M34 30 H20 Q20 50 36 50 M66 30 H80 Q80 50 64 50 M50 67 v14 M34 84 h32" fill="none" stroke={PALETTE.orange} strokeWidth="5" /></svg>
+    case "chess":
+      return <svg {...common}><path d="M42 20 h16 v12 l10 16 H32 l10-16z M36 48 h28 l-6 28 H42z M30 82 h40" fill={PALETTE.lilac} stroke={PALETTE.blueDeep} strokeWidth="3" /></svg>
+    case "room":
+      return <svg {...common}><path d="M18 78 h64 M26 78 V28 h48 v50" fill={PALETTE.cream} stroke={PALETTE.blueDeep} strokeWidth="3" /><rect x="34" y="48" width="16" height="18" fill={PALETTE.pink} /><rect x="56" y="40" width="10" height="26" fill={PALETTE.green} /></svg>
+    case "pool":
+      return <svg {...common}><path d="M18 48 Q34 34 50 48 Q66 62 82 48 V76 Q66 90 50 76 Q34 62 18 76z" fill={PALETTE.sky} stroke={PALETTE.blue} strokeWidth="3" /></svg>
+    case "bandage":
+      return <svg {...common}><rect x="26" y="38" width="48" height="24" rx="12" transform="rotate(-35 50 50)" fill={PALETTE.cream} stroke={PALETTE.orange} strokeWidth="3" /><circle cx="50" cy="50" r="5" fill={PALETTE.pink} /></svg>
+    case "cloud":
+      return <svg {...common}><path d="M24 68 Q16 46 36 42 Q40 20 60 32 Q80 28 82 52 Q92 68 72 72 H30z" fill="#fff" stroke={PALETTE.sky} strokeWidth="3" /></svg>
+    case "box":
+      return <svg {...common}><path d="M22 36 L50 22 L78 36 V72 L50 86 L22 72z" fill={PALETTE.orange} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M22 36 l28 14 28-14 M50 50 v36" fill="none" stroke="#fff" strokeWidth="3" /></svg>
+    case "star":
+      return <svg {...common}><path d="M50 14 l9 24 26 2-20 16 7 26-22-14-22 14 7-26-20-16 26-2z" fill={PALETTE.yellow} stroke={PALETTE.orange} strokeWidth="3" /></svg>
+    case "shirt":
+      return <svg {...common}><path d="M34 24 l16 10 16-10 18 18-12 12-8-8 v38 H36 V46 l-8 8-12-12z" fill={PALETTE.pink} stroke={PALETTE.blueDeep} strokeWidth="3" /></svg>
+    case "bench":
+      return <svg {...common}><rect x="18" y="34" width="64" height="14" rx="4" fill={PALETTE.orange} /><rect x="24" y="54" width="52" height="12" rx="4" fill={PALETTE.orange} /><path d="M28 66 v20 M72 66 v20" stroke={PALETTE.blueDeep} strokeWidth="5" /></svg>
+    case "block":
+      return <svg {...common}><rect x="24" y="24" width="52" height="52" rx="6" fill={PALETTE.lilac} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M24 42 h52 M50 24 v52" stroke="#fff" strokeWidth="3" /></svg>
+    case "hole":
+      return <svg {...common}><ellipse cx="50" cy="58" rx="32" ry="18" fill={PALETTE.blueDeep} /><path d="M20 58 Q50 30 80 58" fill="none" stroke={PALETTE.orange} strokeWidth="5" /></svg>
+    case "stick":
+      return <svg {...common}><path d="M28 78 L72 22" stroke={PALETTE.orange} strokeWidth="10" strokeLinecap="round" /><path d="M26 82 l-6 6 M72 18 l6-6" stroke={PALETTE.green} strokeWidth="5" /></svg>
+    case "seed":
+      return <svg {...common}><ellipse cx="50" cy="58" rx="18" ry="28" transform="rotate(35 50 58)" fill={PALETTE.orange} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M50 40 Q60 24 76 26" fill="none" stroke={PALETTE.green} strokeWidth="5" /></svg>
+    case "skull":
+      return <svg {...common}><path d="M24 48 Q24 20 50 20t26 28q0 18-12 22v10H36V70Q24 66 24 48Z" fill="#fff" stroke={PALETTE.blueDeep} strokeWidth="3" /><circle cx="40" cy="46" r="6" fill={PALETTE.blueDeep} /><circle cx="60" cy="46" r="6" fill={PALETTE.blueDeep} /><path d="M42 62 h16" stroke={PALETTE.blueDeep} strokeWidth="4" /></svg>
+    case "person":
+      return <svg {...common}><circle cx="50" cy="30" r="14" fill={PALETTE.orange} /><path d="M28 82 Q30 50 50 50t22 32" fill={PALETTE.blue} stroke={PALETTE.blueDeep} strokeWidth="3" /></svg>
+    case "animal":
+      return <svg {...common}><ellipse cx="50" cy="54" rx="28" ry="22" fill={PALETTE.orange} /><circle cx="40" cy="48" r="3" fill={PALETTE.blueDeep} /><circle cx="60" cy="48" r="3" fill={PALETTE.blueDeep} /><path d="M42 62 Q50 68 58 62" fill="none" stroke={PALETTE.blueDeep} strokeWidth="3" /></svg>
     case "camera":
       return (
         <svg {...common}>

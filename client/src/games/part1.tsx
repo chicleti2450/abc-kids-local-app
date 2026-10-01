@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ObjectIcon } from "../components/art"
+import { ObjectIcon, wordImage } from "../components/art"
 import { PALETTE, speak } from "../lib/store"
 import {
   GameProps,
@@ -75,7 +75,7 @@ export function Game01({ character, accent, accent2, onHome, onAdvance, isLast, 
         <ProgressDots total={DATA.length} current={idx} color={accent} />
         <div className="mb-2 flex items-center gap-2">
           <div className="rounded-[24px] bg-white/90 p-2.5" style={{ boxShadow: "0 6px 18px rgba(49,84,119,0.14)" }}>
-            <ObjectIcon name={ex.img} size={96} />
+            <ObjectIcon name={wordImage(ex.word, ex.img)} size={96} />
           </div>
           <SpeakButton text={ex.word} label="OUVIR" />
         </div>
@@ -164,7 +164,7 @@ export function Game02({ character, accent, accent2, onHome, onAdvance, isLast, 
         <ProgressDots total={DATA.length} current={idx} color={accent} />
         <div className="mb-2 flex items-center gap-2">
           <div className="rounded-[24px] bg-white/90 p-2.5" style={{ boxShadow: "0 6px 18px rgba(49,84,119,0.14)" }}>
-            <ObjectIcon name={ex.img} size={92} />
+            <ObjectIcon name={wordImage(ex.word, ex.img)} size={92} />
           </div>
           <SpeakButton text={ex.word} label="OUVIR" />
         </div>
@@ -264,7 +264,7 @@ export function Game03({ character, accent, accent2, onHome, onAdvance, isLast, 
         <ProgressDots total={DATA.length} current={idx} color={accent} />
         <div className="mb-2 flex items-center gap-2">
           <div className="rounded-[24px] bg-white/90 p-2" style={{ boxShadow: "0 6px 16px rgba(49,84,119,0.14)" }}>
-            <ObjectIcon name={ex.img} size={86} />
+            <ObjectIcon name={wordImage(ex.word, ex.img)} size={86} />
           </div>
           <SpeakButton text={ex.word} label="OUVIR" />
         </div>
@@ -375,7 +375,7 @@ export function Game04({ character, accent, accent2, onHome, onAdvance, isLast, 
       <div className="flex h-full flex-col items-center">
         <ProgressDots total={DATA.length} current={exIdx} color={accent} />
         <div className="mb-2 rounded-[24px] bg-white/90 p-2.5" style={{ boxShadow: "0 6px 18px rgba(49,84,119,0.14)" }}>
-          <div key={img} className="anim-pop"><ObjectIcon name={img} size={108} /></div>
+          <div key={img} className="anim-pop"><ObjectIcon name={wordImage(word, img)} size={108} /></div>
         </div>
         <div className="mb-1 flex items-center gap-2">
           <div key={word} className="anim-pop text-3xl font-bold tracking-wide" style={{ color: accent }}>{word}</div>
