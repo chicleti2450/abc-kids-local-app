@@ -1,4 +1,5 @@
 import React from "react"
+import { REAL_IMAGE_MAP } from "../lib/realImages"
 import {
   AccessoryId,
   AnimalType,
@@ -660,6 +661,20 @@ export function ObjectIcon({
   size?: number
 }) {
   const common = { width: size, height: size, viewBox: "0 0 100 100" } as const
+  const realImage = REAL_IMAGE_MAP[name]
+  if (realImage) {
+    return (
+      <img
+        src={realImage}
+        alt={name}
+        width={size}
+        height={size}
+        loading="lazy"
+        className="h-auto max-h-full w-auto max-w-full rounded-2xl object-contain"
+        style={{ aspectRatio: "1 / 1" }}
+      />
+    )
+  }
 
   // Animals reuse the avatar art.
   const animalMap: Record<string, AnimalType> = {
