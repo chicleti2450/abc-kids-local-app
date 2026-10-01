@@ -115,6 +115,11 @@ const EX06_ALFA: Ex06[] = [
   { img: "eraser",  word: "BORRACHA",  opts: ["BORRACHA","BORACHA","BORRAXA","BURRACHA"],       hint: "Apaga o lápis: BORRACHA!" },
 ]
 
+const LEGEND_IMAGE_MAP: Record<string, string> = {
+  GATO: "cat", CACHORRO: "dog", BOLA: "ball", CASA: "house", SOL: "sun", LIVRO: "book", ESTRELA: "star", MAÇÃ: "apple",
+  BICICLETA: "bicycle", BORBOLETA: "butterfly", GIRASSOL: "sun", ELEFANTE: "elephant", TARTARUGA: "turtle", CHOCOLATE: "chocolate", BORRACHA: "eraser",
+}
+
 export function Game06({ character, accent, accent2, onHome, onAdvance, isLast, level }: GameProps) {
   const DATA = level === "alfabetico" ? EX06_ALFA : EX06
   const o = useOutcome()
@@ -150,7 +155,7 @@ export function Game06({ character, accent, accent2, onHome, onAdvance, isLast, 
         <Instruction>ESCREVA O NOME DA IMAGEM</Instruction>
         <div className="mb-3 flex items-center gap-3">
           <div className="rounded-[28px] bg-white/95 p-3" style={{ boxShadow: "0 8px 24px rgba(49,84,119,0.18)" }}>
-            <ObjectIcon name={ex.img} size={108} />
+            <ObjectIcon name={LEGEND_IMAGE_MAP[ex.word] ?? ex.img} size={108} />
           </div>
           <SpeakButton text={ex.word} label="DICA" />
         </div>

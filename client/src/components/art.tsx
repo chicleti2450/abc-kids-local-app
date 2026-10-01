@@ -869,6 +869,40 @@ export function ObjectIcon({
           <path d="M43 58 q7 6 14 0" stroke="#E99500" strokeWidth="3" fill="none" strokeLinecap="round" />
         </svg>
       )
+    case "book":
+      return <svg {...common}><rect x="18" y="24" width="64" height="56" rx="6" fill={PALETTE.blue} /><path d="M50 28 v48" stroke="#fff" strokeWidth="4" /><path d="M28 40 h14 M28 50 h14 M58 40 h14 M58 50 h14" stroke="#fff" strokeWidth="3" /></svg>
+    case "cow":
+      return <svg {...common}><ellipse cx="50" cy="56" rx="32" ry="25" fill="#fff" stroke={PALETTE.blueDeep} strokeWidth="3" /><circle cx="50" cy="35" r="20" fill="#fff" stroke={PALETTE.blueDeep} strokeWidth="3" /><circle cx="38" cy="32" r="5" fill={PALETTE.coral} /><circle cx="62" cy="45" r="5" fill={PALETTE.coral} /><circle cx="43" cy="34" r="2" fill={PALETTE.blueDeep} /><circle cx="57" cy="34" r="2" fill={PALETTE.blueDeep} /><path d="M38 78 v10 M62 78 v10" stroke={PALETTE.blueDeep} strokeWidth="5" /></svg>
+    case "rat":
+      return <svg {...common}><ellipse cx="48" cy="58" rx="28" ry="20" fill={PALETTE.skySoft} stroke={PALETTE.blueDeep} strokeWidth="3" /><circle cx="72" cy="42" r="16" fill={PALETTE.skySoft} /><circle cx="66" cy="28" r="8" fill={PALETTE.pink} /><circle cx="76" cy="40" r="2" fill={PALETTE.blueDeep} /><path d="M26 60 Q8 52 12 72" fill="none" stroke={PALETTE.pink} strokeWidth="3" /></svg>
+    case "plant":
+      return <svg {...common}><path d="M48 78 V48" stroke={PALETTE.green} strokeWidth="6" /><path d="M48 58 Q25 42 22 24 Q44 27 48 48 Q52 27 78 24 Q72 46 48 58Z" fill={PALETTE.green} /><path d="M30 78 h40 l-6 10 H36z" fill={PALETTE.orange} /></svg>
+    case "bread":
+      return <svg {...common}><path d="M20 66 Q18 32 50 30 Q82 32 80 66 Q78 80 50 80 Q22 80 20 66Z" fill={PALETTE.yellow} stroke={PALETTE.orange} strokeWidth="3" /><path d="M36 48 l4 5 M52 44 l4 5 M64 52 l4 5" stroke={PALETTE.orange} strokeWidth="4" strokeLinecap="round" /></svg>
+    case "apple":
+      return <svg {...common}><path d="M50 34 Q28 20 24 48 Q22 76 50 82 Q78 76 76 48 Q72 20 50 34Z" fill={PALETTE.coral} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M50 32 Q52 18 66 18" fill="none" stroke={PALETTE.green} strokeWidth="5" strokeLinecap="round" /><path d="M50 26 Q38 14 32 22" fill="none" stroke={PALETTE.green} strokeWidth="5" /></svg>
+    case "airplane":
+      return <svg {...common}><path d="M18 54 l30-8 18-28 8 4-10 27 20 8-3 7-24-4-14 18-7-3 7-19-25 5z" fill={PALETTE.blue} /></svg>
+    case "heart":
+      return <svg {...common}><path d="M50 80 C10 54 18 24 36 24 Q50 24 50 38 Q50 24 64 24 C82 24 90 54 50 80Z" fill={PALETTE.pink} stroke={PALETTE.coral} strokeWidth="3" /></svg>
+    case "fire":
+      return <svg {...common}><path d="M50 86 Q20 78 28 54 Q32 42 46 32 Q43 48 56 52 Q62 36 58 20 Q82 42 76 64 Q70 84 50 86Z" fill={PALETTE.coral} /><path d="M50 76 Q38 68 44 56 Q54 62 56 46 Q68 64 50 76Z" fill={PALETTE.yellow} /></svg>
+    case "hand":
+      return <svg {...common}><path d="M36 78 V48 q0-7 6-7 q5 0 5 6 V26 q0-6 5-6t5 6v21 V30 q0-6 5-6t5 6v19 V36 q0-6 5-6t5 6v28 q0 18-18 18H46q-10 0-10-4Z" fill={PALETTE.orange} stroke={PALETTE.blueDeep} strokeWidth="3" /></svg>
+    case "candy":
+      return <svg {...common}><path d="M28 50 Q50 28 72 50 Q50 72 28 50Z" fill={PALETTE.pink} stroke={PALETTE.coral} strokeWidth="3" /><path d="M28 50 l-16-12 v24z M72 50 l16-12 v24z" fill={PALETTE.yellow} /></svg>
+    case "candle":
+      return <svg {...common}><rect x="36" y="38" width="28" height="42" rx="4" fill={PALETTE.pink} /><path d="M50 38 q-8-12 0-22 q8 10 0 22" fill={PALETTE.yellow} /></svg>
+    case "blanket":
+      return <svg {...common}><path d="M20 28 h60 v52 H20z" fill={PALETTE.pink} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M20 42 h60 M20 56 h60 M20 70 h60" stroke="#fff" strokeWidth="3" opacity=".7" /></svg>
+    case "window":
+      return <svg {...common}><rect x="22" y="22" width="56" height="58" rx="4" fill={PALETTE.skySoft} stroke={PALETTE.blueDeep} strokeWidth="4" /><path d="M50 24 v54 M24 50 h52" stroke={PALETTE.blueDeep} strokeWidth="3" /></svg>
+    case "table":
+      return <svg {...common}><rect x="18" y="34" width="64" height="12" rx="4" fill={PALETTE.orange} /><path d="M28 46 v36 M72 46 v36" stroke={PALETTE.blueDeep} strokeWidth="6" /></svg>
+    case "rainbow":
+      return <svg {...common}><path d="M18 76 Q50 20 82 76" fill="none" stroke={PALETTE.pink} strokeWidth="8" /><path d="M28 76 Q50 38 72 76" fill="none" stroke={PALETTE.yellow} strokeWidth="8" /><path d="M38 76 Q50 54 62 76" fill="none" stroke={PALETTE.green} strokeWidth="8" /></svg>
+    case "mouth":
+      return <svg {...common}><path d="M20 48 Q50 28 80 48 Q50 82 20 48Z" fill={PALETTE.coral} stroke={PALETTE.blueDeep} strokeWidth="3" /><path d="M30 46 h40" stroke="#fff" strokeWidth="6" /></svg>
     case "camera":
       return (
         <svg {...common}>

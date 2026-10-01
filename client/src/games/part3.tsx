@@ -85,13 +85,27 @@ const EXTRA_RHYME_OPTIONS: Record<string, Ex09["opts"]> = {
   BLOCO: [{ text: "TOCO", rhymes: true, img: "ball" }, { text: "LIVRO", rhymes: false, img: "book" }],
 }
 
+const WORD_IMAGES: Record<string, string> = {
+  BOLA: "ball", MOLA: "spring", GATO: "cat", COLA: "glue", PATO: "duck", RATO: "dog",
+  FAROL: "lantern", CASA: "house", LENÇOL: "blanket", VASA: "vase", LIVRO: "book", RASA: "pool", FLOR: "plant",
+  DOR: "bandage", MESA: "table", COR: "rainbow", MÃO: "hand", AVIÃO: "airplane", SALA: "house", PÃO: "bread",
+  CARRO: "car", BALA: "candy", VACA: "cow", DADO: "dice", PACA: "animal", CALOR: "sun", VAPOR: "cloud",
+  VOCÊ: "heart", POSSE: "box", GOLA: "shirt", JANELA: "window", PORTA: "house", VELA: "candle",
+  MORTE: "skull", SORTE: "star", NOVA: "star", COVA: "hole", SANTA: "star", MANTA: "blanket",
+  BOCA: "mouth", FOCA: "dog", BANCO: "bench", FRANCO: "person", GRATO: "star", FOCO: "lantern", TOCO: "stick",
+  ESCOLA: "book", ESTRELA: "star", FORTE: "shield", PROVA: "book", PLANTA: "plant", TROCA: "ball",
+  BRANCO: "cloud", PRATO: "plate", GRÃO: "seed", BLOCO: "block", AMOR: "heart", BRASA: "fire",
+}
+
 export function Game09({ character, accent, accent2, onHome, onAdvance, isLast, level }: GameProps) {
   const DATA = level === "alfabetico" ? EX09_ALFA : EX09
   const o = useOutcome()
   const [idx, setIdx] = useState(0)
   const [picked, setPicked] = useState<number[]>([])
   const ex = DATA[idx]
-  const options = [...ex.opts, ...(EXTRA_RHYME_OPTIONS[ex.word] ?? [])]
+  const options = [...ex.opts, ...(EXTRA_RHYME_OPTIONS[ex.word] ?? [])].filter((option, index, list) =>
+    list.findIndex((candidate) => candidate.text === option.text) === index,
+  )
   const rhymeCount = options.filter((op) => op.rhymes).length
 
   const pick = (i: number, op: (typeof ex.opts)[0]) => {
@@ -121,7 +135,7 @@ export function Game09({ character, accent, accent2, onHome, onAdvance, isLast, 
         <ProgressDots total={DATA.length} current={idx} color={accent} />
         <div className="mb-2 flex items-center gap-2">
           <div className="rounded-[28px] bg-white/95 p-3" style={{ boxShadow: "0 8px 24px rgba(49,84,119,0.18)" }}>
-            <ObjectIcon name={ex.img} size={96} />
+            <ObjectIcon name={WORD_IMAGES[ex.word] ?? ex.img} size={96} />
           </div>
           <div className="flex flex-col gap-2">
             <span className="text-3xl font-bold" style={{ color: accent }}>{ex.word}</span>
@@ -137,7 +151,7 @@ export function Game09({ character, accent, accent2, onHome, onAdvance, isLast, 
               <button key={i} onClick={() => pick(i, op)} disabled={done}
                 className="tap-shrink w-full flex items-center gap-3 rounded-2xl px-4 py-2 text-left font-bold uppercase text-white"
                 style={{ background: bg, boxShadow: `0 4px 0 ${shade(bg, -26)}`, opacity: done ? 0.7 : 1 }}>
-                <ObjectIcon name={op.img} size={40} />
+                <ObjectIcon name={WORD_IMAGES[op.text] ?? op.img} size={40} />
                 <span className="text-lg">{op.text}</span>
                 {done && <span className="ml-auto text-xl">✓</span>}
               </button>
