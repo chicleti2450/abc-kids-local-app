@@ -919,6 +919,9 @@ export function TeacherHome({
                   </div>
                 ) : filteredStudents.map((s) => {
                   const ov = studentOverview(s)
+                  const silabicoPct = studentLevelOverview(s, "silabico").overallPct
+                  const alfabeticoPct = studentLevelOverview(s, "alfabetico").overallPct
+                  const classificationPct = alfabeticoPct ?? silabicoPct
                   return (
                     <div
                       key={s.id}
@@ -943,9 +946,8 @@ export function TeacherHome({
                         <div className="mt-1">
                           <PerfBar pct={ov.overallPct} />
                         </div>
-                        <div className="mt-1 flex flex-wrap gap-1">
-                          <PsicogeneseBadge pct={studentLevelOverview(s, "silabico").overallPct} />
-                          <PsicogeneseBadge pct={studentLevelOverview(s, "alfabetico").overallPct} />
+                        <div className="mt-1">
+                          <PsicogeneseBadge pct={classificationPct} />
                         </div>
                       </button>
                       <div className="flex flex-col items-end gap-1.5 shrink-0">
