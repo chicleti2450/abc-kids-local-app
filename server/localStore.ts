@@ -18,12 +18,16 @@ export type LocalState = {
   lastUpdated: string;
 };
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { seedSchoolData } from "./seed";
 
-const dataDirectory = path.resolve(process.cwd(), "data");
+// Pode ser alterado para um disco/pasta permanente sem mudar o código:
+// ABC_KIDS_DATA_DIR=C:\ABC-Kids-data npm run dev
+const dataDirectory = path.resolve(process.env.ABC_KIDS_DATA_DIR ?? path.join(process.cwd(), "data"));
 const dataFile = path.join(dataDirectory, "abc-kids.json");
+const backupFile = path.join(dataDirectory, "abc-kids.json.bak");
+const tempFile = path.join(dataDirectory, "abc-kids.json.tmp");
 
 const initialState: LocalState = {
   activities: [
@@ -41,14 +45,32 @@ export async function readLocalState(): Promise<LocalState> {
     const parsed = JSON.parse(content) as Partial<LocalState>;
     return { ...initialState, ...parsed, appData: parsed.appData ?? initialState.appData };
   } catch {
-    await writeLocalState(initialState);
-    return initialState;
+    // Se o processo foi interrompido durante uma gravação, recupera o backup.
+    try {
+      const backup = await readFile(backupFile, "utf8");
+      const parsed = JSON.parse(backup) as Partial<LocalState>;
+      const recovered = { ...initialState, ...parsed, appData: parsed.appData ?? initialState.appData };
+      await writeLocalState(recovered);
+      return recovered;
+    } catch {
+      await writeLocalState(initialState);
+      return initialState;
+    }
   }
 }
 
 export async function writeLocalState(state: LocalState): Promise<void> {
   await mkdir(dataDirectory, { recursive: true });
-  await writeFile(dataFile, JSON.stringify(state, null, 2), "utf8");
+  const serialized = JSON.stringify(state, null, 2);
+  // Escreve primeiro em temporário e só depois substitui o arquivo principal.
+  // Assim uma queda durante a gravação não deixa um JSON incompleto.
+  await writeFile(tempFile, serialized, "utf8");
+  try {
+    await rename(dataFile, backupFile);
+  } catch {
+    // Primeira gravação: ainda não existe arquivo principal para copiar.
+  }
+  await rename(tempFile, dataFile);
 }
 
 export async function addActivity(title: string, subject: string): Promise<Activity> {

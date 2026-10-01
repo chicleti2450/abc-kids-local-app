@@ -118,3 +118,5 @@ dist
 .env.*
 !.env.example
 data/*.json
+data/*.json.bak
+data/*.json.tmp
