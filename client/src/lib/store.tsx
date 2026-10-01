@@ -313,7 +313,7 @@ export const GAMES: GameMeta[] = [
   { id: 6, title: "Legendas", colors: [PALETTE.pink, PALETTE.skySoft], icon: "camera", rounds: 6 },
   { id: 7, title: "Letras Móveis", colors: [PALETTE.orange, PALETTE.yellow], icon: "monkey", rounds: 6 },
   { id: 8, title: "Escute a Palavra", colors: [PALETTE.lilac, PALETTE.blue], icon: "speaker", rounds: 8 },
-  { id: 9, title: "Complete as Letras", colors: [PALETTE.green, PALETTE.yellow], icon: "cat", rounds: 10 },
+  { id: 9, title: "Rima ou Não Rima", colors: [PALETTE.green, PALETTE.yellow], icon: "cat", rounds: 10 },
   { id: 10, title: "Caça-Palavras", colors: [PALETTE.blue, PALETTE.orange], icon: "magnify", rounds: 5 },
   { id: 11, title: "Lanterna Mágica", colors: [PALETTE.blueDeep, PALETTE.lilac], icon: "lantern", rounds: 5 },
   { id: 12, title: "Alimente o Monstrinho", colors: [PALETTE.green, PALETTE.pink], icon: "monster", rounds: 5 },

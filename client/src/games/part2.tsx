@@ -119,22 +119,25 @@ export function Game06({ character, accent, accent2, onHome, onAdvance, isLast, 
   const DATA = level === "alfabetico" ? EX06_ALFA : EX06
   const o = useOutcome()
   const [idx, setIdx] = useState(0)
+  const [answer, setAnswer] = useState("")
   const [chosen, setChosen] = useState<string | null>(null)
   const ex = DATA[idx]
 
-  const pick = (w: string) => {
-    if (chosen || o.state) return
-    speak(w)
-    if (w === ex.word) {
-      setChosen(w)
+  const submitAnswer = () => {
+    if (chosen || o.state || !answer.trim()) return
+    const typed = answer.trim().toLocaleUpperCase("pt-BR")
+    const normalize = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    speak(typed)
+    if (normalize(typed) === normalize(ex.word)) {
+      setChosen(typed)
       setTimeout(() => {
         if (idx >= DATA.length - 1) o.correct()
-        else { o.advanceExercise(); setIdx((i) => i + 1); setChosen(null) }
+        else { o.advanceExercise(); setIdx((i) => i + 1); setAnswer(""); setChosen(null) }
       }, 800)
     } else {
       const advance = () => {
         if (idx >= DATA.length - 1) onAdvance()
-        else { setIdx((i) => i + 1); setChosen(null) }
+        else { setIdx((i) => i + 1); setAnswer(""); setChosen(null) }
       }
       o.wrong(advance, ex.word)
     }
@@ -144,30 +147,29 @@ export function Game06({ character, accent, accent2, onHome, onAdvance, isLast, 
     <GameShell title="Legendas" character={character} accent={accent} onHome={onHome}>
       <div className="flex h-full flex-col items-center">
         <ProgressDots total={DATA.length} current={idx} color={accent} />
-        <Instruction>QUAL PALAVRA DESCREVE A IMAGEM?</Instruction>
+        <Instruction>ESCREVA O NOME DA IMAGEM</Instruction>
         <div className="mb-3 flex items-center gap-3">
           <div className="rounded-[28px] bg-white/95 p-3" style={{ boxShadow: "0 8px 24px rgba(49,84,119,0.18)" }}>
             <ObjectIcon name={ex.img} size={108} />
           </div>
           <SpeakButton text={ex.word} label="DICA" />
         </div>
-        <div className="mt-auto grid grid-cols-2 gap-3 pb-3">
-          {ex.opts.map((w) => {
-            const isChosen = chosen === w
-            const isCorrect = w === ex.word
-            const bg = isChosen && isCorrect ? PALETTE.green : isChosen ? PALETTE.coral : accent2
-            return (
-              <button key={w} onClick={() => pick(w)} disabled={!!chosen}
-                className="tap-shrink rounded-2xl px-2 py-3 text-sm font-bold text-white uppercase"
-                style={{ background: bg, boxShadow: `0 4px 0 ${shade(bg, -26)}`, opacity: chosen && !isChosen ? 0.5 : 1 }}>
-                {w}
-              </button>
-            )
-          })}
+        <div className="mt-auto flex w-full max-w-md flex-col gap-2 pb-3">
+          <input value={answer} onChange={(event) => setAnswer(event.target.value)}
+            onKeyDown={(event) => { if (event.key === "Enter") submitAnswer() }}
+            disabled={!!chosen || !!o.state} autoCapitalize="characters" autoComplete="off"
+            placeholder="Digite a palavra..."
+            className="rounded-2xl border-4 bg-[#fffdf8] px-4 py-3 text-center text-xl font-bold uppercase outline-none"
+            style={{ borderColor: accent2, color: PALETTE.blueDeep }} />
+          <button onClick={submitAnswer} disabled={!!chosen || !!o.state || !answer.trim()}
+            className="tap-shrink rounded-2xl px-4 py-3 text-base font-bold uppercase"
+            style={{ background: chosen ? PALETTE.green : accent2, color: PALETTE.blueDeep, boxShadow: `0 4px 0 ${shade(accent2, -26)}`, opacity: !answer.trim() ? 0.55 : 1 }}>
+            {chosen ? "MUITO BEM!" : "CONFIRMAR"}
+          </button>
         </div>
       </div>
       <OutcomeOverlay state={o.state} character={character} hint={ex.hint}
-        clear={() => { o.clear(); setChosen(null) }} onAdvance={onAdvance} isLast={isLast} />
+        clear={() => { o.clear(); setAnswer(""); setChosen(null) }} onAdvance={onAdvance} isLast={isLast} />
     </GameShell>
   )
 }
@@ -207,6 +209,7 @@ export function Game07({ character, accent, accent2, onHome, onAdvance, isLast, 
   const pool = useMemo(() => shuffle(ex.word.split("")), [idx])
   const [slots, setSlots] = useState<(string | null)[]>(ex.word.split("").map(() => null))
   const [used, setUsed] = useState<number[]>([])
+  const [dragging, setDragging] = useState<number | null>(null)
 
   const resetEx = (newIdx: number) => {
     setSlots(DATA[newIdx].word.split("").map(() => null))
@@ -215,12 +218,12 @@ export function Game07({ character, accent, accent2, onHome, onAdvance, isLast, 
 
   const nextEmpty = slots.findIndex((s) => s === null)
 
-  const pickLetter = (ch: string, i: number) => {
-    if (used.includes(i) || nextEmpty === -1 || o.state) return
+  const placeLetter = (ch: string, i: number, targetIndex = nextEmpty) => {
+    if (used.includes(i) || targetIndex === -1 || slots[targetIndex] || o.state) return
     speak(ch)
-    const expected = ex.word[nextEmpty]
+    const expected = ex.word[targetIndex]
     if (ch === expected) {
-      const ns = [...slots]; ns[nextEmpty] = ch
+      const ns = [...slots]; ns[targetIndex] = ch
       const nu = [...used, i]
       setSlots(ns); setUsed(nu)
       if (ns.every(Boolean)) {
@@ -251,16 +254,25 @@ export function Game07({ character, accent, accent2, onHome, onAdvance, isLast, 
           </div>
           <SpeakButton text={ex.word} label="OUVIR" />
         </div>
-        <Instruction>MONTE A PALAVRA!</Instruction>
+        <Instruction>ARRASTE CADA LETRA ATÉ O LUGAR CERTO</Instruction>
         <div className="mb-4 flex gap-2">
-          {slots.map((s, i) => <Slot key={i} letter={s || undefined} color={accent} size={56} highlight={i === nextEmpty} />)}
+          {slots.map((s, i) => (
+            <div key={i} onDragOver={(event) => event.preventDefault()} onDrop={() => {
+              if (dragging !== null) placeLetter(pool[dragging], dragging, i)
+              setDragging(null)
+            }}>
+              <Slot letter={s || undefined} color={accent} size={56} highlight={i === nextEmpty} />
+            </div>
+          ))}
         </div>
         <div className="mt-auto flex flex-wrap justify-center gap-3 pb-3">
           {pool.map((ch, i) => (
-            <Tile key={i} color={used.includes(i) ? "#C4D3DE" : accent2} size={60}
-              disabled={used.includes(i)} speakText={ch} onClick={() => pickLetter(ch, i)}>
+            <button key={i} draggable={!used.includes(i)} onDragStart={() => { setDragging(i); speak(ch) }}
+              onClick={() => placeLetter(ch, i)} disabled={used.includes(i)} aria-label={`Arrastar letra ${ch}`}
+              className="tap-shrink flex items-center justify-center rounded-2xl font-bold text-white"
+              style={{ width: 60, height: 60, fontSize: 27, background: used.includes(i) ? "#C4D3DE" : accent2, boxShadow: `0 5px 0 ${shade(used.includes(i) ? "#C4D3DE" : accent2, -28)}`, opacity: used.includes(i) ? 0.4 : 1 }}>
               {ch}
-            </Tile>
+            </button>
           ))}
         </div>
       </div>

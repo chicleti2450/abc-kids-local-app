@@ -176,7 +176,21 @@ function WordBubble({
 const BUBBLE_POSITIONS = [
   { x: 18, y: 25 }, { x: 72, y: 22 }, { x: 82, y: 55 },
   { x: 65, y: 78 }, { x: 20, y: 75 }, { x: 10, y: 52 },
+  { x: 42, y: 18 }, { x: 88, y: 36 }, { x: 42, y: 72 }, { x: 8, y: 34 },
 ]
+
+const EXTRA_MONSTER_WORDS: Record<string, MonsterRound["words"]> = {
+  MA: [{ text: "MAR", hasIt: true }, { text: "MÁGICO", hasIt: true }, { text: "PATO", hasIt: false }, { text: "LUA", hasIt: false }],
+  CA: [{ text: "CARRO", hasIt: true }, { text: "CAMISA", hasIt: true }, { text: "BOLA", hasIt: false }, { text: "SAPO", hasIt: false }],
+  BA: [{ text: "BAÚ", hasIt: true }, { text: "BARCO", hasIt: true }, { text: "GATO", hasIt: false }, { text: "LIVRO", hasIt: false }],
+  SA: [{ text: "SABÃO", hasIt: true }, { text: "SACO", hasIt: true }, { text: "BOLA", hasIt: false }, { text: "PATO", hasIt: false }],
+  BO: [{ text: "BOLO", hasIt: true }, { text: "BONÉ", hasIt: true }, { text: "SAPO", hasIt: false }, { text: "GATO", hasIt: false }],
+  GRA: [{ text: "GRAVATA", hasIt: true }, { text: "GRANIZO", hasIt: true }, { text: "PATO", hasIt: false }, { text: "LIVRO", hasIt: false }],
+  FLO: [{ text: "FLOREIRA", hasIt: true }, { text: "FLORESTA", hasIt: true }, { text: "GATO", hasIt: false }, { text: "BOLA", hasIt: false }],
+  TRA: [{ text: "TRAVESSEIRO", hasIt: true }, { text: "TRAVA", hasIt: true }, { text: "CASA", hasIt: false }, { text: "SAPO", hasIt: false }],
+  PRE: [{ text: "PRESENTE", hasIt: true }, { text: "PRESO", hasIt: true }, { text: "BOLA", hasIt: false }, { text: "GATO", hasIt: false }],
+  CRE: [{ text: "CREME", hasIt: true }, { text: "CREDO", hasIt: true }, { text: "PATO", hasIt: false }, { text: "LUA", hasIt: false }],
+}
 
 const ROUNDS_ALFA: MonsterRound[] = [
   {
@@ -242,7 +256,10 @@ const ROUNDS_ALFA: MonsterRound[] = [
 ]
 
 export function Game12({ character, accent, accent2, onHome, onAdvance, isLast, level }: GameProps) {
-  const DATA = level === "alfabetico" ? ROUNDS_ALFA : ROUNDS
+  const DATA = (level === "alfabetico" ? ROUNDS_ALFA : ROUNDS).map((round) => ({
+    ...round,
+    words: [...round.words, ...(EXTRA_MONSTER_WORDS[round.syllable] ?? [])],
+  }))
   const o = useOutcome()
   const [roundIdx, setRoundIdx] = useState(0)
   const [eaten, setEaten] = useState<number[]>([])

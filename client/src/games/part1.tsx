@@ -316,6 +316,19 @@ const EX04_ALFA: Ex04[] = [
     swaps: [{ letter:"S", word:"SORTE", img:"star",  ok:true },{ letter:"M", word:"MORTE", img:"ball",   ok:true },{ letter:"Z", word:"ZORTE", img:"ball", ok:false }] },
 ]
 
+const EXTRA_SWAP_OPTIONS: Record<string, SwapItem[]> = {
+  BOLA: [{ letter: "B", word: "BOLA", img: "ball", ok: true }, { letter: "T", word: "TOLA", img: "ball", ok: false }],
+  GATO: [{ letter: "R", word: "RATO", img: "dog", ok: true }, { letter: "L", word: "LATO", img: "ball", ok: false }],
+  FOCA: [{ letter: "B", word: "BOCA", img: "dog", ok: true }, { letter: "L", word: "LOCA", img: "ball", ok: false }],
+  CAMA: [{ letter: "C", word: "CAMA", img: "house", ok: true }, { letter: "L", word: "LAMA", img: "ball", ok: false }],
+  MALA: [{ letter: "F", word: "FALA", img: "speaker", ok: true }, { letter: "T", word: "TALA", img: "ball", ok: false }],
+  CANTO: [{ letter: "C", word: "CANTO", img: "speaker", ok: true }, { letter: "P", word: "PANTO", img: "ball", ok: false }],
+  TRATO: [{ letter: "L", word: "LATO", img: "ball", ok: true }, { letter: "F", word: "FRATO", img: "ball", ok: false }],
+  PISTA: [{ letter: "M", word: "MISTA", img: "ball", ok: false }, { letter: "R", word: "RISTA", img: "ball", ok: false }],
+  VENTO: [{ letter: "L", word: "LENTO", img: "ball", ok: true }, { letter: "P", word: "PENTO", img: "ball", ok: false }],
+  FORTE: [{ letter: "N", word: "NORTE", img: "star", ok: true }, { letter: "T", word: "TORTE", img: "ball", ok: false }],
+}
+
 export function Game04({ character, accent, accent2, onHome, onAdvance, isLast, level }: GameProps) {
   const DATA = level === "alfabetico" ? EX04_ALFA : EX04
   const o = useOutcome()
@@ -324,6 +337,7 @@ export function Game04({ character, accent, accent2, onHome, onAdvance, isLast, 
   const [img, setImg] = useState(DATA[0].baseImg)
   const [discovered, setDiscovered] = useState<string[]>([])
   const ex = DATA[exIdx]
+  const swaps = [...ex.swaps, ...(EXTRA_SWAP_OPTIONS[ex.base] ?? [])]
 
   const swap = (s: SwapItem) => {
     if (o.state) return
@@ -372,8 +386,8 @@ export function Game04({ character, accent, accent2, onHome, onAdvance, isLast, 
           <span className="text-sm font-semibold uppercase" style={{ color: PALETTE.blueDeep }}>
             PALAVRAS NOVAS: {discovered.length}/{ex.needed}
           </span>
-          <div className="flex gap-3">
-            {ex.swaps.map((s) => (
+          <div className="grid grid-cols-5 gap-2">
+            {swaps.map((s) => (
               <Tile key={s.letter} color={discovered.includes(s.letter) ? PALETTE.green : accent2}
                 size={68} speakText={s.word} onClick={() => swap(s)}>
                 {s.letter}

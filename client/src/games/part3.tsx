@@ -62,13 +62,37 @@ const EX09_ALFA: Ex09[] = [
     opts: [{ text:"FOCO",   rhymes:true,  img:"sun"   },{ text:"LIVRO",  rhymes:false, img:"book"  },{ text:"TOCO",   rhymes:true,  img:"ball"  }] },
 ]
 
+const EXTRA_RHYME_OPTIONS: Record<string, Ex09["opts"]> = {
+  BOLA: [{ text: "ESCOLA", rhymes: true, img: "book" }, { text: "PATO", rhymes: false, img: "duck" }],
+  PATO: [{ text: "RATO", rhymes: true, img: "dog" }, { text: "MESA", rhymes: false, img: "house" }],
+  SOL: [{ text: "FAROL", rhymes: true, img: "sun" }, { text: "LUA", rhymes: false, img: "star" }],
+  CASA: [{ text: "BRASA", rhymes: true, img: "ball" }, { text: "LIVRO", rhymes: false, img: "book" }],
+  FLOR: [{ text: "AMOR", rhymes: true, img: "star" }, { text: "SAPO", rhymes: false, img: "frog" }],
+  PÃO: [{ text: "MÃO", rhymes: true, img: "ball" }, { text: "GATO", rhymes: false, img: "cat" }],
+  MALA: [{ text: "SALA", rhymes: true, img: "house" }, { text: "CARRO", rhymes: false, img: "ball" }],
+  FACA: [{ text: "VACA", rhymes: true, img: "dog" }, { text: "DADO", rhymes: false, img: "dice" }],
+  AMOR: [{ text: "CALOR", rhymes: true, img: "sun" }, { text: "PATO", rhymes: false, img: "duck" }],
+  DOCE: [{ text: "VOCÊ", rhymes: true, img: "ball" }, { text: "LIVRO", rhymes: false, img: "book" }],
+  ESCOLA: [{ text: "GOLA", rhymes: true, img: "ball" }, { text: "JANELA", rhymes: false, img: "house" }],
+  ESTRELA: [{ text: "VELA", rhymes: true, img: "star" }, { text: "PORTA", rhymes: false, img: "house" }],
+  FORTE: [{ text: "SORTE", rhymes: true, img: "star" }, { text: "BOLA", rhymes: false, img: "ball" }],
+  PROVA: [{ text: "NOVA", rhymes: true, img: "star" }, { text: "CASA", rhymes: false, img: "house" }],
+  PLANTA: [{ text: "MANTA", rhymes: true, img: "ball" }, { text: "LIVRO", rhymes: false, img: "book" }],
+  TROCA: [{ text: "FOCA", rhymes: true, img: "dog" }, { text: "GATO", rhymes: false, img: "cat" }],
+  BRANCO: [{ text: "FRANCO", rhymes: true, img: "star" }, { text: "LIVRO", rhymes: false, img: "book" }],
+  PRATO: [{ text: "GRATO", rhymes: true, img: "star" }, { text: "BOLA", rhymes: false, img: "ball" }],
+  GRÃO: [{ text: "AVIÃO", rhymes: true, img: "ball" }, { text: "CASA", rhymes: false, img: "house" }],
+  BLOCO: [{ text: "TOCO", rhymes: true, img: "ball" }, { text: "LIVRO", rhymes: false, img: "book" }],
+}
+
 export function Game09({ character, accent, accent2, onHome, onAdvance, isLast, level }: GameProps) {
   const DATA = level === "alfabetico" ? EX09_ALFA : EX09
   const o = useOutcome()
   const [idx, setIdx] = useState(0)
   const [picked, setPicked] = useState<number[]>([])
   const ex = DATA[idx]
-  const rhymeCount = ex.opts.filter((op) => op.rhymes).length
+  const options = [...ex.opts, ...(EXTRA_RHYME_OPTIONS[ex.word] ?? [])]
+  const rhymeCount = options.filter((op) => op.rhymes).length
 
   const pick = (i: number, op: (typeof ex.opts)[0]) => {
     if (picked.includes(i) || o.state) return
@@ -78,7 +102,7 @@ export function Game09({ character, accent, accent2, onHome, onAdvance, isLast, 
         if (idx >= DATA.length - 1) onAdvance()
         else { setIdx((n) => n + 1); setPicked([]) }
       }
-      o.wrong(advance, ex.opts.filter((o) => o.rhymes).map((o) => o.text).join(" e "))
+      o.wrong(advance, options.filter((o) => o.rhymes).map((o) => o.text).join(" e "))
       return
     }
     const np = [...picked, i]
@@ -106,7 +130,7 @@ export function Game09({ character, accent, accent2, onHome, onAdvance, isLast, 
         </div>
         <Instruction>QUAIS RIMAM?</Instruction>
         <div className="mt-auto flex flex-col gap-3 pb-3 w-full px-2">
-          {ex.opts.map((op, i) => {
+          {options.map((op, i) => {
             const done = picked.includes(i)
             const bg = done ? PALETTE.green : accent2
             return (
