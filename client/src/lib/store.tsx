@@ -174,9 +174,6 @@ export interface Classroom {
 
 /* ---------------- Psicogênese da Escrita ---------------- */
 export type PsicogenesLevel =
-  | "Pré-Silábico"
-  | "Silábico SVS"
-  | "Silábico CVS"
   | "Silábico-Alfabético"
   | "Alfabético"
 
@@ -187,24 +184,19 @@ export const PSICOGENESE_LEVELS: {
   color: string
   short: string
 }[] = [
-  { level: "Pré-Silábico", min: 0, max: 19, color: PALETTE.coral, short: "PRÉ-SIL." },
-  { level: "Silábico SVS", min: 20, max: 39, color: PALETTE.orange, short: "SIL. SVS" },
-  { level: "Silábico CVS", min: 40, max: 59, color: PALETTE.yellow, short: "SIL. CVS" },
-  { level: "Silábico-Alfabético", min: 60, max: 79, color: PALETTE.turquoise, short: "SIL.-ALF." },
+  { level: "Silábico-Alfabético", min: 0, max: 79, color: PALETTE.turquoise, short: "SIL.-ALF." },
   { level: "Alfabético", min: 80, max: 100, color: PALETTE.green, short: "ALFABÉTICO" },
 ]
 
-export function psicogenese(pct: number | null): PsicogenesLevel {
-  if (pct === null || pct < 20) return "Pré-Silábico"
-  if (pct < 40) return "Silábico SVS"
-  if (pct < 60) return "Silábico CVS"
+export function psicogenese(pct: number | null): PsicogenesLevel | null {
+  if (pct === null) return null
   if (pct < 80) return "Silábico-Alfabético"
   return "Alfabético"
 }
 
 export function psicogeneseColor(pct: number | null): string {
   const lvl = psicogenese(pct)
-  return PSICOGENESE_LEVELS.find((l) => l.level === lvl)?.color ?? PALETTE.blue
+  return PSICOGENESE_LEVELS.find((l) => l.level === lvl)?.color ?? "#B0C4D4"
 }
 
 /* ---------------- Stat helpers (derived, pure) ---------------- */

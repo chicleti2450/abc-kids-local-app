@@ -101,7 +101,7 @@ function PsicogeneseBadge({ pct }: { pct: number | null }) {
         <circle cx="6" cy="6" r="5" fill="rgba(255,255,255,0.3)" />
         <path d="M3 6l2 2 4-4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
-      {level}
+      {level ? `${level} · ${pct}%` : "SEM CLASSIFICAÇÃO"}
     </div>
   )
 }
@@ -119,9 +119,9 @@ function PsicogeneseChart({ pct }: { pct: number | null }) {
       </div>
       <div className="flex flex-col gap-1.5">
         {PSICOGENESE_LEVELS.map((lvl) => {
-          const isActive = lvl.level === current
+          const isActive = current !== null && lvl.level === current
           const isPast =
-            pct !== null &&
+            current !== null &&
             PSICOGENESE_LEVELS.findIndex((l) => l.level === current) >
               PSICOGENESE_LEVELS.findIndex((l) => l.level === lvl.level)
           return (
@@ -163,6 +163,11 @@ function PsicogeneseChart({ pct }: { pct: number | null }) {
           )
         })}
       </div>
+      {pct === null && (
+        <p className="mt-3 text-center text-xs font-semibold" style={{ color: PALETTE.blue }}>
+          A classificação aparecerá após o primeiro jogo.
+        </p>
+      )}
     </div>
   )
 }

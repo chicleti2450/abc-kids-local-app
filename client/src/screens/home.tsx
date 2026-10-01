@@ -1,7 +1,7 @@
 import React from "react"
 import { AnimalAvatar, Sparkle, Star } from "../components/art"
 import { ExitButton, Screen, shade } from "../components/kit"
-import { PALETTE, Student, playTone } from "../lib/store"
+import { PALETTE, Student, playTone, psicogenese, studentOverview } from "../lib/store"
 import { Logo } from "./onboarding"
 
 export function Home({
@@ -18,6 +18,8 @@ export function Home({
   onExit: () => void
 }) {
   const { name, character } = student
+  const overallPct = studentOverview(student).overallPct
+  const classification = psicogenese(overallPct)
   return (
     <Screen pad={false}>
       <div className="min-h-0 flex-1 overflow-y-auto px-5 pt-5 pb-8">
@@ -65,16 +67,16 @@ export function Home({
           {/* Silábico-Alfabético — always unlocked */}
           <LevelCard
             label="SILÁBICO-ALFABÉTICO"
-            subtitle="Nível atual"
+            subtitle={overallPct === null ? "Sem dados" : classification === "Silábico-Alfabético" ? `${overallPct}% atual` : "Concluído"}
             color={PALETTE.turquoise}
             unlocked
-            active
+            active={classification === "Silábico-Alfabético"}
             onClick={() => { playTone("tap"); onOpenLevel("silabico") }}
           />
           {/* Alfabético — locked until teacher unlocks */}
           <LevelCard
             label="ALFABÉTICO"
-            subtitle="Bloqueado"
+            subtitle={overallPct === null ? "Sem dados" : classification === "Alfabético" ? `${overallPct}% atual` : "A partir de 80%"}
             color={PALETTE.lilac}
             unlocked={!!student.alphabeticoUnlocked}
             active={false}
