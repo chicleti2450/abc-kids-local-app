@@ -1,18 +1,18 @@
 /* ---------------- Palette (fixed for the whole app) ---------------- */
 export const PALETTE = {
-  sky: "#8FD8F4",
-  skySoft: "#B8E8FA",
-  blue: "#4A9FE8",
-  blueDeep: "#315477",
-  yellow: "#FFD85A",
-  orange: "#FF9F55",
-  pink: "#F58FB2",
-  green: "#72D6A1",
-  lilac: "#B9A4E8",
-  coral: "#F47F73",
-  cream: "#FFF8EA",
-  turquoise: "#6FD6D0",
-  white: "#FFFFFF",
+  sky: "#EADCF3",
+  skySoft: "#F7E6E3",
+  blue: "#B59AD7",
+  blueDeep: "#5C4A66",
+  yellow: "#F4DFA4",
+  orange: "#F1B49C",
+  pink: "#E7AFC4",
+  green: "#B7D6B2",
+  lilac: "#C9B8E8",
+  coral: "#E79AA0",
+  cream: "#FFF7E8",
+  turquoise: "#A8D8CD",
+  white: "#FFFDF8",
 } as const
 
 /* ---------------- Animal identities ---------------- */

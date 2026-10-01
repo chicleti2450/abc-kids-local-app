@@ -67,13 +67,14 @@ export function PrimaryButton({
         onClick?.()
       }}
       disabled={disabled}
-      className={`tap-shrink w-full rounded-full py-4 text-center text-xl font-bold text-white ${className}`}
+      className={`tap-shrink w-full rounded-full py-4 text-center text-xl font-bold text-[#5c4a66] ${className}`}
       style={{
         background: disabled ? "#C4D3DE" : color,
         boxShadow: disabled
           ? "none"
           : `0 8px 0 ${shade(color, -26)}, 0 14px 22px ${color}66`,
         opacity: disabled ? 0.75 : 1,
+        color: disabled ? "#5c4a66" : PALETTE.blueDeep,
         letterSpacing: "0.02em",
       }}
     >
@@ -144,7 +145,7 @@ export function GameHeader({
     <div className="mb-4 flex items-center gap-3">
       <BackButton onClick={onBack} />
       <div
-        className="flex-1 truncate rounded-full px-4 py-2 text-center text-lg font-bold text-white"
+        className="flex-1 truncate rounded-full px-4 py-2 text-center text-lg font-bold text-[#5c4a66]"
         style={{ background: accent, boxShadow: `0 4px 0 ${shade(accent, -24)}` }}
       >
         {title}

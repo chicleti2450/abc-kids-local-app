@@ -65,9 +65,9 @@ export function Sparkle({
 function Cloud({ x, y, s = 1, opacity = 1 }: { x: number; y: number; s?: number; opacity?: number }) {
   return (
     <g transform={`translate(${x} ${y}) scale(${s})`} opacity={opacity}>
-      <ellipse cx="0" cy="0" rx="34" ry="20" fill="#fff" />
-      <ellipse cx="-26" cy="6" rx="20" ry="14" fill="#fff" />
-      <ellipse cx="26" cy="6" rx="22" ry="15" fill="#fff" />
+      <ellipse cx="0" cy="0" rx="34" ry="20" fill="#fffaf1" />
+      <ellipse cx="-26" cy="6" rx="20" ry="14" fill="#fffaf1" />
+      <ellipse cx="26" cy="6" rx="22" ry="15" fill="#fffaf1" />
     </g>
   )
 }
@@ -88,7 +88,7 @@ export function SkyBackground({
         style={{
           background: night
             ? "linear-gradient(180deg,#2b3d63 0%,#3a4f7a 55%,#4a5f8a 100%)"
-            : "linear-gradient(180deg,#8FD8F4 0%,#B8E8FA 60%,#DFF4FC 100%)",
+            : "linear-gradient(180deg,#FFF7E8 0%,#F7E6E3 58%,#F0EAF5 100%)",
         }}
       />
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice">

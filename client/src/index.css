@@ -4,18 +4,18 @@
 @theme {
   --font-sans: 'Fredoka', ui-rounded, 'Segoe UI', sans-serif;
 
-  --color-sky: #8fd8f4;
-  --color-sky-soft: #b8e8fa;
-  --color-blue: #4a9fe8;
-  --color-blue-deep: #315477;
-  --color-yellow: #ffd85a;
-  --color-orange: #ff9f55;
-  --color-pink: #f58fb2;
-  --color-green: #72d6a1;
-  --color-lilac: #b9a4e8;
-  --color-coral: #f47f73;
-  --color-cream: #fff8ea;
-  --color-turquoise: #6fd6d0;
+  --color-sky: #eadcf3;
+  --color-sky-soft: #f7e6e3;
+  --color-blue: #b59ad7;
+  --color-blue-deep: #5c4a66;
+  --color-yellow: #f4dfa4;
+  --color-orange: #f1b49c;
+  --color-pink: #e7afc4;
+  --color-green: #b7d6b2;
+  --color-lilac: #c9b8e8;
+  --color-coral: #e79aa0;
+  --color-cream: #fff7e8;
+  --color-turquoise: #a8d8cd;
 
   --radius-blob: 2.25rem;
 }
@@ -35,8 +35,8 @@ body {
   margin: 0;
   min-width: 280px;
   font-family: 'Fredoka', ui-rounded, 'Segoe UI', sans-serif;
-  color: #315477;
-  background: #dff2fb;
+  color: #5c4a66;
+  background: #fff7e8;
   -webkit-font-smoothing: antialiased;
   overscroll-behavior: none;
 }
@@ -50,6 +50,11 @@ body {
 .abc-device-frame {
   min-width: 0;
   min-height: 0;
+}
+
+/* Warm cards keep the interface softer than pure white while preserving contrast. */
+.bg-white {
+  background-color: #fffdf8 !important;
 }
 
 @media (max-width: 479px), (max-height: 620px) {
