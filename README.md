@@ -1,4 +1,4 @@
-# ABC KIDS
+# ABC KIDS 📚
 
 O **ABC KIDS** é uma proposta de jogo educativo simples e interativa, criada especificamente para estimular o desenvolvimento da alfabetização de forma lúdica. O projeto transforma o processo de alfabetização em uma experiência leve, divertida e significativa, respeitando o tempo de aprendizagem e o nível de cada criança.
 
