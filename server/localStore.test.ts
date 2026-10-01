@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { addActivity, completeActivity, readLocalState } from "./localStore";
+import { seedSchoolData } from "./seed";
 
 describe("localStore", () => {
   it("persists a created activity and its completion state", async () => {
@@ -18,5 +19,22 @@ describe("localStore", () => {
       const { writeLocalState } = await import("./localStore");
       await writeLocalState(finalState);
     }
+  });
+
+  it("seeds Silvana, the 1ºEF classroom, and 34 students without duplicates", () => {
+    const first = seedSchoolData({ students: [], teachers: [], classrooms: [] });
+    const second = seedSchoolData(first);
+    const students = first.students as Array<{ name: string; password: string }>;
+    const teacher = first.teachers as Array<{ name: string; password: string }>;
+    const classroom = (first.classrooms as Array<{ name: string; studentIds: string[] }>).find((item) => item.name === "1ºEF");
+
+    expect(students).toHaveLength(34);
+    expect(students[0]).toMatchObject({ name: "Amaya", password: "EDU01" });
+    expect(students[33]).toMatchObject({ name: "Tainá", password: "EDU34" });
+    expect(teacher).toContainEqual(expect.objectContaining({ name: "Silvana", password: "SESI1234" }));
+    expect(classroom?.studentIds).toHaveLength(34);
+    expect(second.students).toHaveLength(34);
+    expect(second.teachers).toHaveLength(1);
+    expect(second.classrooms).toHaveLength(1);
   });
 });

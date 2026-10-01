@@ -20,6 +20,7 @@ export type LocalState = {
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { seedSchoolData } from "./seed";
 
 const dataDirectory = path.resolve(process.cwd(), "data");
 const dataFile = path.join(dataDirectory, "abc-kids.json");
@@ -68,7 +69,14 @@ export async function completeActivity(id: string): Promise<LocalState> {
 }
 
 export async function readAppData(): Promise<PersistedAppData> {
-  return (await readLocalState()).appData;
+  const state = await readLocalState();
+  const seeded = seedSchoolData(state.appData);
+  if (JSON.stringify(seeded) !== JSON.stringify(state.appData)) {
+    state.appData = seeded;
+    state.lastUpdated = new Date().toISOString();
+    await writeLocalState(state);
+  }
+  return seeded;
 }
 
 export async function writeAppData(appData: PersistedAppData): Promise<void> {
