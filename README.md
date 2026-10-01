@@ -20,7 +20,7 @@ O ecossistema do ABC KIDS conta com 12 dinâmicas e jogos diferentes voltados pa
 6. **Legendas**
 7. **Letras móveis** 
 8. **Escuta palavra**
-9. **Rima ou não Rima**
+9. **Rima ou Não Rima**
 10. **Caça-palavras**
 11. **Lanterna Mágica**
 12. **Alimente o monstrinho**
