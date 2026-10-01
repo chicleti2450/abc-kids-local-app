@@ -77,7 +77,7 @@ export function LevelGames({
 
         <div className="grid grid-cols-2 gap-3.5">
           {GAMES.map((g, i) => {
-            const stats = gameStats(student, g.id)
+            const stats = gameStats(student, g.id, isAlfa ? "alfabetico" : "silabico")
             return (
               <button
                 key={g.id}

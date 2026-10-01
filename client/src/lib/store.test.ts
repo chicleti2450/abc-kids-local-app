@@ -3,6 +3,7 @@ import {
   DEFAULT_CHARACTER,
   gameStats,
   psicogenese,
+  studentLevelOverview,
   studentOverview,
   type Student,
 } from "./store"
@@ -38,5 +39,14 @@ describe("classificação e percentuais", () => {
       { gameId: 1, acertos: 3, erros: 1, tentativas: 4, pct: 75, date: "2026-01-01" },
       { gameId: 1, acertos: 4, erros: 0, tentativas: 4, pct: 100, date: "2026-01-02" },
     ] : [])).overallPct).toBe(88)
+  })
+
+  it("mantém os percentuais separados entre os níveis", () => {
+    const item = student([
+      { gameId: 1, level: "silabico", acertos: 3, erros: 1, tentativas: 4, pct: 75, date: "2026-01-01" },
+      { gameId: 1, level: "alfabetico", acertos: 1, erros: 1, tentativas: 2, pct: 50, date: "2026-01-02" },
+    ])
+    expect(studentLevelOverview(item, "silabico").overallPct).toBe(75)
+    expect(studentLevelOverview(item, "alfabetico").overallPct).toBe(50)
   })
 })

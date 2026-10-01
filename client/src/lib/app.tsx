@@ -5,6 +5,7 @@ import {
   DEFAULT_CHARACTER,
   Play,
   PlayResult,
+  LearningLevel,
   Student,
   Teacher,
 } from "./store"
@@ -20,7 +21,7 @@ interface AppCtx {
   createStudent: (name: string, password: string) => string
   deleteStudent: (id: string) => void
   editStudent: (id: string, name: string, character: Character, password?: string) => void
-  recordPlay: (gameId: number, result: PlayResult) => void
+  recordPlay: (gameId: number, result: PlayResult, level: LearningLevel) => void
   teachers: Teacher[]
   teacherName: string | null
   teacherLogin: (name: string, password: string) => boolean
@@ -200,9 +201,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }))
   }
 
-  const recordPlay = (gameId: number, result: PlayResult) => {
+  const recordPlay = (gameId: number, result: PlayResult, level: LearningLevel) => {
     if (!currentId) return
-    const play: Play = { ...result, gameId, date: new Date().toISOString() }
+    const play: Play = { ...result, gameId, level, date: new Date().toISOString() }
     setStore((s) => ({
       ...s,
       students: s.students.map((st) =>

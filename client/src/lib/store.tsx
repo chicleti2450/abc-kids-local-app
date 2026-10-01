@@ -137,9 +137,11 @@ export interface PlayResult {
   tentativas: number
   pct: number
 }
+export type LearningLevel = "silabico" | "alfabetico"
 export interface Play extends PlayResult {
   gameId: number
   date: string
+  level?: LearningLevel
 }
 export interface Student {
   id: string
@@ -211,8 +213,8 @@ export interface GameStats {
   evolution: number[]
 }
 
-export function gameStats(student: Student, gameId: number): GameStats {
-  const list = student.plays.filter((p) => p.gameId === gameId)
+export function gameStats(student: Student, gameId: number, level?: LearningLevel): GameStats {
+  const list = student.plays.filter((p) => p.gameId === gameId && (!level || p.level === level || (level === "silabico" && !p.level)))
   if (list.length === 0) {
     return { gameId, plays: 0, acertos: 0, erros: 0, tentativas: 0, pct: null, lastDate: null, evolution: [] }
   }
@@ -252,6 +254,11 @@ export function studentOverview(student: Student): StudentOverview {
     best: sorted[0] ?? null,
     worst: sorted.length ? sorted[sorted.length - 1] : null,
   }
+}
+
+export function studentLevelOverview(student: Student, level: LearningLevel): StudentOverview {
+  const plays = student.plays.filter((p) => p.level === level || (level === "silabico" && !p.level))
+  return studentOverview({ ...student, plays })
 }
 
 export interface ClassGameAvg {

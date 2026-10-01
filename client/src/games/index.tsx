@@ -41,7 +41,7 @@ export function GamePlayer({
 
   const record = (r: PlayResult) => {
     setLastResult(r)
-    recordPlay(id, r)
+    recordPlay(id, r, level)
   }
 
   const Comp = MAP[id]

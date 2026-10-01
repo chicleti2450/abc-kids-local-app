@@ -16,6 +16,7 @@ import {
   playTone,
   psicogenese,
   psicogeneseColor,
+  studentLevelOverview,
   studentOverview,
 } from "../lib/store"
 import { useApp } from "../lib/app"
@@ -789,6 +790,9 @@ export function TeacherHome({
   const [deleteStudentId, setDeleteStudentId] = useState<string | null>(null)
   const [editStudentId, setEditStudentId] = useState<string | null>(null)
   const [showCreateStudent, setShowCreateStudent] = useState(false)
+  const [search, setSearch] = useState("")
+  const [levelFilter, setLevelFilter] = useState<"todos" | "silabico" | "alfabetico">("todos")
+  const [performanceFilter, setPerformanceFilter] = useState<"todos" | "avancados" | "ajuda" | "sem-atividade">("todos")
   const cls = classAverages(students)
   const perGame = [...cls.perGame].filter((g) => g.pct !== null)
   const best = perGame.length ? perGame.reduce((a, b) => (b.pct! > a.pct! ? b : a)) : null
@@ -798,6 +802,17 @@ export function TeacherHome({
   const existingNames = students.map((s) => s.name.toLowerCase())
   const editingStudent = students.find((s) => s.id === editStudentId)
   const deletingStudent = students.find((s) => s.id === deleteStudentId)
+  const filteredStudents = students.filter((student) => {
+    const matchesSearch = student.name.toLowerCase().includes(search.trim().toLowerCase())
+    const silabico = studentLevelOverview(student, "silabico").overallPct
+    const alfabetico = studentLevelOverview(student, "alfabetico").overallPct
+    const matchesLevel = levelFilter === "todos" || (levelFilter === "silabico" ? silabico !== null : alfabetico !== null)
+    const matchesPerformance = performanceFilter === "todos"
+      || (performanceFilter === "avancados" && (alfabetico !== null || (silabico !== null && silabico >= 80)))
+      || (performanceFilter === "ajuda" && (student.plays.length === 0 || (silabico !== null && silabico < 60)))
+      || (performanceFilter === "sem-atividade" && student.plays.length === 0)
+    return matchesSearch && matchesLevel && matchesPerformance
+  })
 
   return (
     <Panel>
@@ -867,13 +882,42 @@ export function TeacherHome({
                 + CADASTRAR
               </button>
             </div>
+            <div className="mb-4 rounded-2xl bg-white p-3" style={{ boxShadow: "0 4px 12px rgba(49,84,119,0.08)" }}>
+              <input
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="Buscar aluno pelo nome..."
+                className="mb-2 w-full rounded-xl border-2 px-3 py-2 text-sm font-semibold outline-none"
+                style={{ borderColor: PALETTE.skySoft, color: PALETTE.blueDeep }}
+              />
+              <div className="grid grid-cols-2 gap-2">
+                <select value={levelFilter} onChange={(event) => setLevelFilter(event.target.value as typeof levelFilter)} className="rounded-xl border-2 px-2 py-2 text-xs font-bold" style={{ borderColor: PALETTE.skySoft, color: PALETTE.blueDeep }}>
+                  <option value="todos">Todos os níveis</option>
+                  <option value="silabico">Silábico-alfabético</option>
+                  <option value="alfabetico">Alfabético</option>
+                </select>
+                <select value={performanceFilter} onChange={(event) => setPerformanceFilter(event.target.value as typeof performanceFilter)} className="rounded-xl border-2 px-2 py-2 text-xs font-bold" style={{ borderColor: PALETTE.skySoft, color: PALETTE.blueDeep }}>
+                  <option value="todos">Todo desempenho</option>
+                  <option value="avancados">Mais avançados</option>
+                  <option value="ajuda">Precisam de ajuda</option>
+                  <option value="sem-atividade">Sem atividade</option>
+                </select>
+              </div>
+              {(search || levelFilter !== "todos" || performanceFilter !== "todos") && (
+                <div className="mt-2 text-xs font-bold" style={{ color: PALETTE.blue }}>{filteredStudents.length} aluno(s) encontrado(s)</div>
+              )}
+            </div>
             {students.length === 0 ? (
               <div className="rounded-2xl bg-white p-6 text-center text-sm font-medium" style={{ color: PALETTE.blue }}>
                 Nenhum aluno cadastrado. Clique em "+ CADASTRAR" para adicionar!
               </div>
             ) : (
               <div className="flex flex-col gap-2.5">
-                {students.map((s) => {
+                {filteredStudents.length === 0 ? (
+                  <div className="rounded-2xl bg-white p-6 text-center text-sm font-semibold" style={{ color: PALETTE.blue }}>
+                    Nenhum aluno corresponde aos filtros selecionados.
+                  </div>
+                ) : filteredStudents.map((s) => {
                   const ov = studentOverview(s)
                   return (
                     <div
@@ -899,8 +943,9 @@ export function TeacherHome({
                         <div className="mt-1">
                           <PerfBar pct={ov.overallPct} />
                         </div>
-                        <div className="mt-1">
-                          <PsicogeneseBadge pct={ov.overallPct} />
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          <PsicogeneseBadge pct={studentLevelOverview(s, "silabico").overallPct} />
+                          <PsicogeneseBadge pct={studentLevelOverview(s, "alfabetico").overallPct} />
                         </div>
                       </button>
                       <div className="flex flex-col items-end gap-1.5 shrink-0">

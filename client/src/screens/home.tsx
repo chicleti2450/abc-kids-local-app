@@ -1,7 +1,7 @@
 import React from "react"
 import { AnimalAvatar, Sparkle, Star } from "../components/art"
 import { ExitButton, Screen, shade } from "../components/kit"
-import { PALETTE, Student, playTone, psicogenese, studentOverview } from "../lib/store"
+import { PALETTE, Student, playTone, psicogenese, studentLevelOverview } from "../lib/store"
 import { Logo } from "./onboarding"
 
 export function Home({
@@ -18,8 +18,9 @@ export function Home({
   onExit: () => void
 }) {
   const { name, character } = student
-  const overallPct = studentOverview(student).overallPct
-  const classification = psicogenese(overallPct)
+  const silabicoPct = studentLevelOverview(student, "silabico").overallPct
+  const alfabeticoPct = studentLevelOverview(student, "alfabetico").overallPct
+  const classification = psicogenese(silabicoPct)
   return (
     <Screen pad={false}>
       <div className="min-h-0 flex-1 overflow-y-auto px-5 pt-5 pb-8">
@@ -67,7 +68,7 @@ export function Home({
           {/* Silábico-Alfabético — always unlocked */}
           <LevelCard
             label="SILÁBICO-ALFABÉTICO"
-            subtitle={overallPct === null ? "Sem dados" : classification === "Silábico-Alfabético" ? `${overallPct}% atual` : "Concluído"}
+            subtitle={silabicoPct === null ? "Sem dados" : classification === "Silábico-Alfabético" ? `${silabicoPct}% neste nível` : "Concluído"}
             color={PALETTE.turquoise}
             unlocked
             active={classification === "Silábico-Alfabético"}
@@ -76,7 +77,7 @@ export function Home({
           {/* Alfabético — locked until teacher unlocks */}
           <LevelCard
             label="ALFABÉTICO"
-            subtitle={overallPct === null ? "Sem dados" : classification === "Alfabético" ? `${overallPct}% atual` : "A partir de 80%"}
+            subtitle={alfabeticoPct === null ? "Sem dados" : `${alfabeticoPct}% neste nível`}
             color={PALETTE.lilac}
             unlocked={!!student.alphabeticoUnlocked}
             active={false}
